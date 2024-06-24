@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     #region Fields
     [Header("Movement Settings")]
-    [SerializeField] private float movementSpeed = 1f;
+    private float movementSpeed = 1f;
 
     private Vector2 _movement;
     private Rigidbody2D _rb;
@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     #endregion
 
-    private void Awake()
+    private void Start()
     {
+        GetDataFromManager();
+
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -30,7 +32,11 @@ public class PlayerController : MonoBehaviour
         AnimatePlayer(_movement);
     }
     #region Utility Methods
-
+    // Gets settings (speed and such) from the Game Manager instance
+    private void GetDataFromManager()
+    {
+        movementSpeed = GameManager.Instance.GameData.playerMovementSpeed;
+    }
     private void OnMove(Vector2 direction)
     {
         _movement = direction;
