@@ -5,12 +5,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed = 1f;
 
     private PlayerControls playerControls;
-    private Vector2 movement;
+    public Vector2 movement;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    private bool isMoving;
+    public bool isMoving;
+    public bool moveUp;
+    public bool moveDown;
 
     private void Awake()
     {
@@ -34,41 +36,43 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         AdjustPlayerFacingDirection(movement);
-    }
-
-    private void PlayerInput()
-    {
-        movement = playerControls.Movement.Move.ReadValue<Vector2>();
 
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
 
         if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x) && movement.y > 0)
         {
-            animator.SetBool("moveUp", true);
+            moveUp = true; 
         }
 
         if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x) && movement.y < 0)
         {
-            animator.SetBool("moveDown", true);
+            moveDown = true;
         }
 
-        if (Mathf.Abs(movement.y) <= Mathf.Abs(movement.x))
+        if (Mathf.Abs(movement.y) <= Mathf.Abs(movement.x) || !isMoving)
         {
-            animator.SetBool("moveUp", false);
-            animator.SetBool("moveDown", false);
+            moveUp = false;
+            moveDown = false;
         }
 
-        if(movement.x > -0.1 && movement.x < 0.1 && movement.y > -0.1 && movement.y < 0.1)
+        if (movement.x > -0.1 && movement.x < 0.1 && movement.y > -0.1 && movement.y < 0.1)
         {
             isMoving = false;
-            animator.SetBool("isMoving", false);
         }
         else
         {
             isMoving = true;
-            animator.SetBool("isMoving", true);
         }
+
+        animator.SetBool("moveUp", moveUp);
+        animator.SetBool("moveDown", moveDown);
+        animator.SetBool("isMoving", isMoving);
+    }
+
+    private void PlayerInput()
+    {
+        movement = playerControls.Movement.Move.ReadValue<Vector2>();
     }
 
     private void AdjustPlayerFacingDirection(Vector2 movement)
