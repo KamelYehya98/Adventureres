@@ -2,93 +2,76 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Fields
+    [Header("Movement Settings")]
     [SerializeField] private float movementSpeed = 1f;
 
-    private PlayerControls playerControls;
-    public Vector2 movement;
-    private Rigidbody2D rb;
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-
-    public bool isMoving;
-    public bool moveUp;
-    public bool moveDown;
+    private Vector2 _movement;
+    private Rigidbody2D _rb;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+    #endregion
 
     private void Awake()
     {
-        playerControls = new PlayerControls();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void Update()
-    {
-        PlayerInput();
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
     {
-        Move();
-        AdjustPlayerFacingDirection(movement);
-
-        animator.SetFloat("moveX", movement.x);
-        animator.SetFloat("moveY", movement.y);
-
-        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x) && movement.y > 0)
+        if (_movement != Vector2.zero)
         {
-            moveUp = true; 
+            Move();
+            AdjustPlayerFacingDirection(_movement);
         }
 
-        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x) && movement.y < 0)
-        {
-            moveDown = true;
-        }
+        AnimatePlayer(_movement);
+    }
+    #region Utility Methods
 
-        if (Mathf.Abs(movement.y) <= Mathf.Abs(movement.x) || !isMoving)
-        {
-            moveUp = false;
-            moveDown = false;
-        }
-
-        if (movement.x > -0.1 && movement.x < 0.1 && movement.y > -0.1 && movement.y < 0.1)
-        {
-            isMoving = false;
-        }
-        else
-        {
-            isMoving = true;
-        }
-
-        animator.SetBool("moveUp", moveUp);
-        animator.SetBool("moveDown", moveDown);
-        animator.SetBool("isMoving", isMoving);
+    private void OnMove(Vector2 direction)
+    {
+        _movement = direction;
     }
 
-    private void PlayerInput()
+    private void Move()
     {
-        movement = playerControls.Movement.Move.ReadValue<Vector2>();
+        transform.position += new Vector3(_movement.x, _movement.y, 0) * movementSpeed * Time.deltaTime;
     }
 
     private void AdjustPlayerFacingDirection(Vector2 movement)
     {
         if (movement.x > 0)
         {
-            spriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
         }
-        else if(movement.x < 0)
+        else if (movement.x < 0)
         {
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
         }
     }
 
-    private void Move()
+    private void AnimatePlayer(Vector2 direction)
     {
-        rb.MovePosition(rb.position + movement * (movementSpeed * Time.fixedDeltaTime));
+        _animator.SetFloat("moveX", direction.x);
+        _animator.SetFloat("moveY", direction.y);
+
+
+        _animator.SetBool("moveUp", direction.y > 0);
+        _animator.SetBool("moveDown", direction.y < 0);
+        _animator.SetBool("isMoving", direction != Vector2.zero);
     }
+    #endregion
+    #region Subscribing To Event
+    private void OnEnable()
+    {
+        PlayerInputInvoker.PlayerMovement += OnMove;
+    }
+    private void OnDisable()
+    {
+        PlayerInputInvoker.PlayerMovement += OnMove;
+    }
+    #endregion
 }
