@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Monke Boys
   productName: Adventurers
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -704,7 +704,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
   cloudProjectId: dc246a16-c95c-492f-81fa-1ca7f28922ec
   framebufferDepthMemorylessMode: 0
