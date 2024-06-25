@@ -1,9 +1,5 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,11 +11,30 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameData defaultData;
 
+    private ClassManager classManager;
+    private Transform spawnPoint;
+
+    private PlayerClassData selectedClassData;
+
     public GameData GameData
     {
         get
         {
             return gameData;
+        }
+    }
+    public ClassManager ClassManager
+    {
+        get
+        {
+            return classManager;
+        }
+    }
+    public Transform SpawnPoint
+    {
+        get
+        {
+            return spawnPoint;
         }
     }
     #endregion
@@ -51,6 +66,49 @@ public class GameManager : MonoBehaviour
             gameObj.name = "GameManager";
             instance = gameObj.AddComponent<GameManager>();
         }
+    }
+
+    #endregion
+
+    #region Utility Methods
+    public void SelectClass(int classIndex)
+    {
+        switch (classIndex)
+        {
+            case 0:
+                selectedClassData = classManager.mageData;
+                break;
+            case 1:
+                selectedClassData = classManager.warriorData;
+                break;
+            case 2:
+                selectedClassData = classManager.marksmanData;
+                break;
+        }
+        LoadGameScene();
+    }
+
+    private void LoadGameScene()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            InstantiateClass();
+        }
+    }
+
+    private void InstantiateClass()
+    {
+        GameObject player = new GameObject(selectedClassData.className);
+        PlayerClass playerClass = player.AddComponent(System.Type.GetType(selectedClassData.className)) as PlayerClass;
+
+        playerClass.Initialize(selectedClassData);
+        player.transform.position = spawnPoint.position;
+        player.transform.rotation = spawnPoint.rotation;
     }
     #endregion
 }
