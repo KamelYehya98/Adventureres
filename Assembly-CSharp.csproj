@@ -60,8 +60,20 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.34f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Abilities\FireBall.cs" />
+    <Compile Include="Assets\Scripts\Abilities\FireballAbility.cs" />
+    <Compile Include="Assets\Scripts\GameManager\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Classes\PlayerClass.cs" />
+    <Compile Include="Assets\Scripts\Classes\ClassSelectionButton.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Classes\MarksmanClass.cs" />
+    <Compile Include="Assets\Scripts\Abilities\Ability.cs" />
+    <Compile Include="Assets\Scripts\Classes\WarriorClass.cs" />
+    <Compile Include="Assets\Scripts\Classes\MageClass.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerControls.cs" />
+    <Compile Include="Assets\Scripts\Classes\ClassManager.cs" />
+    <Compile Include="Assets\Scripts\Classes\PlayerClassData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
