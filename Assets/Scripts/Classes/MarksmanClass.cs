@@ -2,24 +2,34 @@ using UnityEngine;
 
 public class MarksmanClass : PlayerClass
 {
-    public PlayerClassData marksmanData;
+    [SerializeField]
+    private PlayerClassData _marksmanData;
 
-    private void Start()
+    private new void Start()
     {
-        className = marksmanData.className;
-        health = marksmanData.health;
-        mana = marksmanData.mana;
-        attackPower = marksmanData.attackPower;
-        defense = marksmanData.defense;
+        Initialize(_marksmanData);
+
+        inputActions.Player.Attack.performed += ctx => Attack();
+        inputActions.Player.SpecialAbility.performed += ctx => SpecialAbility();
     }
 
     public override void Attack()
     {
-        Debug.Log($"{className} shoots an arrow.");
+        if (basicAttack != null && _marksmanData.mana >= basicAttack.manaCost)
+        {
+            _marksmanData.mana -= basicAttack.manaCost;
+            basicAttack.Activate(gameObject);
+            Debug.Log($"{_marksmanData.className} performs {basicAttack.abilityName}.");
+        }
     }
 
     public override void SpecialAbility()
     {
-        Debug.Log($"{className} uses Rapid Fire.");
+        if (specialAbility != null && _marksmanData.mana >= specialAbility.manaCost)
+        {
+            _marksmanData.mana -= specialAbility.manaCost;
+            specialAbility.Activate(gameObject);
+            Debug.Log($"{_marksmanData.className} performs {specialAbility.abilityName}.");
+        }
     }
 }

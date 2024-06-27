@@ -4,7 +4,6 @@ public class ClassManager : MonoBehaviour
 {
     public PlayerClassData mageData;
     public PlayerClassData warriorData;
-    public PlayerClassData marksmanData;
 
     public static ClassManager Instance { get; private set; }
 

@@ -7,8 +7,10 @@ public class GameData : ScriptableObject
 {
     [Header ("Player Settings")]
     [SerializeField] public float playerMovementSpeed = 1f;
+
     [Header("Enemy Settings")]
     [SerializeField] public float enemyMovementSpeed = 1f;
+
     [Header("Game Settings")]
-    [SerializeField] public float somethin;
+    [SerializeField] public Transform spawnPoint;
 }

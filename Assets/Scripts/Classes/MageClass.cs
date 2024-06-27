@@ -2,35 +2,34 @@ using UnityEngine;
 
 public class MageClass : PlayerClass
 {
-    public PlayerClassData mageData;
-    public Animator animator;
-    public Ability basicAttack;
-    public Ability specialAbility;
+    [SerializeField]
+    private PlayerClassData _mageData;
 
-    private void Start()
+    private new void Start()
     {
-        Initialize(mageData);
+        Initialize(_mageData);
+
+        inputActions.Player.Attack.performed += ctx => Attack();
+        inputActions.Player.SpecialAbility.performed += ctx => SpecialAbility();
     }
 
     public override void Attack()
     {
-        if (basicAttack != null && mana >= basicAttack.manaCost)
+        if (basicAttack != null && _mageData.mana >= basicAttack.manaCost)
         {
-            animator.SetTrigger("Attack");
-            mana -= basicAttack.manaCost;
+            _mageData.mana -= basicAttack.manaCost;
             basicAttack.Activate(gameObject);
-            Debug.Log($"{className} performs {basicAttack.abilityName}.");
+            Debug.Log($"{_mageData.className} performs {basicAttack.abilityName}.");
         }
     }
 
     public override void SpecialAbility()
     {
-        if (specialAbility != null && mana >= specialAbility.manaCost)
+        if (specialAbility != null && _mageData.mana >= specialAbility.manaCost)
         {
-            animator.SetTrigger("SpecialAbility");
-            mana -= specialAbility.manaCost;
+            _mageData.mana -= specialAbility.manaCost;
             specialAbility.Activate(gameObject);
-            Debug.Log($"{className} performs {specialAbility.abilityName}.");
+            Debug.Log($"{_mageData.className} performs {specialAbility.abilityName}.");
         }
     }
 }

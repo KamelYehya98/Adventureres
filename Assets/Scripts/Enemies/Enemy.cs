@@ -18,6 +18,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerClass player = other.GetComponent<PlayerClass>();
+        if (player != null)
+        {
+            Attack(player);
+        }
+    }
+    
     private void Die()
     {
         Debug.Log($"{enemyName} has died.");
@@ -30,7 +39,6 @@ public class Enemy : MonoBehaviour
         {
             lastAttackTime = Time.time;
             player.TakeDamage(attackPower);
-            Debug.Log($"{enemyName} attacks {player.className} for {attackPower} damage.");
         }
     }
 }
