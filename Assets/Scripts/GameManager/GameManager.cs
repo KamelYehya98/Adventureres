@@ -13,17 +13,12 @@ public class GameManager : MonoBehaviour
 
     private PlayerClassData _selectedClassData;
 
-    public GameData GameData
-    {
-        get
-        {
-            return _gameData;
-        }
-    }
+    public GameData GameData => _gameData;
+
     #endregion
 
     #region Singleton Setup
-    // To setup Singleton
+
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -33,27 +28,59 @@ public class GameManager : MonoBehaviour
             {
                 SetupInstance();
             }
-
             return _instance;
         }
     }
-    #endregion
 
-    #region Method to Create Singleton Instance
     private static void SetupInstance()
     {
         _instance = FindObjectOfType<GameManager>();
-
         if (_instance == null)
         {
-            GameObject gameObj = new GameObject();
-            gameObj.name = "GameManager";
+            GameObject gameObj = new GameObject("GameManager");
             _instance = gameObj.AddComponent<GameManager>();
+            DontDestroyOnLoad(gameObj);
         }
     }
+
     #endregion
 
-    #region Method to initiate selected class data
+    #region Unity Methods
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
+
+    #endregion
+
+    #region Scene Loading
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "SampleScene")
+        {
+            InstantiateClass();
+        }
+    }
+
     public void SelectClass(int classIndex)
     {
         switch (classIndex)
@@ -64,23 +91,17 @@ public class GameManager : MonoBehaviour
             case 1:
                 _selectedClassData = classManager.warriorData;
                 break;
+            // Add other cases for different classes
+            default:
+                Debug.LogError("Invalid class index selected.");
+                return;
         }
-
         LoadGameScene();
     }
-    #endregion
 
     private void LoadGameScene()
     {
         SceneManager.LoadScene("SampleScene");
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        if (SceneManager.GetActiveScene().name == "SampleScene")
-        {
-            InstantiateClass();
-        }
     }
 
     private void InstantiateClass()
@@ -90,7 +111,14 @@ public class GameManager : MonoBehaviour
             GameObject player = Instantiate(_selectedClassData.prefab, Vector3.zero, Quaternion.identity);
             PlayerClass playerClass = player.GetComponent<PlayerClass>();
             playerClass.Initialize(_selectedClassData);
-            player.transform.SetPositionAndRotation(_gameData.spawnPoint.position, _gameData.spawnPoint.rotation);
+            
+            player.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Selected class data is null.");
         }
     }
+
+    #endregion
 }

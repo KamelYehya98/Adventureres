@@ -434,9 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff027b8158e7864b9e7e06ea5faec3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData: {fileID: 11400000, guid: 3287b47b2744a304c9e7fd84c87ead96, type: 2}
+  _gameData: {fileID: 11400000, guid: 3287b47b2744a304c9e7fd84c87ead96, type: 2}
   classManager: {fileID: 981385646}
-  spawnPoint: {fileID: 0}
 --- !u!4 &1081865729
 Transform:
   m_ObjectHideFlags: 0

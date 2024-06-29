@@ -17,6 +17,7 @@ MonoBehaviour:
   mana: 200
   attackPower: 10
   defense: 6
+  movementSpeed: 4
   basicAttack: {fileID: 0}
   specialAbility: {fileID: 0}
   prefab: {fileID: 2700383917992796796, guid: c4b0aedeb4f726148a15b6ba07a58377, type: 3}

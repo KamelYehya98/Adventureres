@@ -2,11 +2,12 @@ using UnityEngine;
 
 public abstract class PlayerClass : MonoBehaviour
 {
-    private string className;
-    private int health;
-    private int mana;
-    private int attackPower;
-    private int defense;
+    protected string className;
+    protected int health;
+    protected int mana;
+    protected int attackPower;
+    protected int defense;
+    protected int movementSpeed;
 
     public Ability basicAttack;
     public Ability specialAbility;
@@ -26,6 +27,7 @@ public abstract class PlayerClass : MonoBehaviour
         defense = data.defense;
         basicAttack = data.basicAttack;
         specialAbility = data.specialAbility;
+        movementSpeed = data.movementSpeed;
 
         inputActions = new PlayerControls();
         inputActions.Player.Enable();
@@ -60,7 +62,7 @@ public abstract class PlayerClass : MonoBehaviour
 
     private void Move()
     {
-        transform.position += new Vector3(moveInput.x, moveInput.y, 0) * 1f * Time.deltaTime;
+        transform.position += new Vector3(moveInput.x, moveInput.y, 0) * movementSpeed * Time.deltaTime;
     }
 
     private void AdjustPlayerFacingDirection(Vector2 movement)

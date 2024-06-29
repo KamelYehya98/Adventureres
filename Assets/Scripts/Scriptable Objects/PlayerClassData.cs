@@ -8,6 +8,7 @@ public class PlayerClassData : ScriptableObject
     public int mana;
     public int attackPower;
     public int defense;
+    public int movementSpeed;
     public Ability basicAttack;
     public Ability specialAbility;
     public GameObject prefab;
