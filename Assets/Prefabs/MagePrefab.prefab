@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5668283049300636517}
   m_Layer: 0
   m_Name: MagePrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,9 +68,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.028715014, y: -0.10229719}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3725773
 --- !u!50 &2641354887214764214
 Rigidbody2D:
   serializedVersion: 4
@@ -110,14 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab8dbcf302966f43b4818f5524dbd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  className: 
-  health: 0
-  mana: 0
-  attackPower: 0
-  defense: 0
   basicAttack: {fileID: 0}
   specialAbility: {fileID: 0}
-  mageData: {fileID: 11400000, guid: c254e439b45afbc47afabe13f25a1a4f, type: 2}
+  _mageData: {fileID: 11400000, guid: c254e439b45afbc47afabe13f25a1a4f, type: 2}
 --- !u!95 &4917509632545315610
 Animator:
   serializedVersion: 5

@@ -65,6 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Abilities\FireBall.cs" />
+    <Compile Include="Assets\Scripts\Enemies\MeleeEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\PlayerClassData.cs" />
     <Compile Include="Assets\Scripts\Abilities\FireballAbility.cs" />
     <Compile Include="Assets\Scripts\GameManager\GameManager.cs" />

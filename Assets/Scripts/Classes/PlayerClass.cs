@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class PlayerClass : MonoBehaviour
 {
     protected string className;
-    protected int health;
+    protected float health;
     protected int mana;
     protected int attackPower;
     protected int defense;
@@ -90,7 +90,7 @@ public abstract class PlayerClass : MonoBehaviour
     public abstract void Attack();
     public abstract void SpecialAbility();
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
