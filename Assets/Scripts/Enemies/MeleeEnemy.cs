@@ -1,18 +1,23 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Classes;
+using UnityEngine;
 
-public class MeleeEnemy : Enemy
+namespace Assets.Scripts.Enemiies
 {
-    protected override void Attack(PlayerClass player)
+    public class MeleeEnemy : Enemy
     {
-        if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
+        protected override void Attack(PlayerClass player)
         {
-            enemyData.lastAttackTime = Time.time;
-            player.TakeDamage(enemyData.attackPower);
-            Debug.Log($"{enemyData.enemyName} attacks the player with melee attack.");
+            if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
+            {
+                enemyData.lastAttackTime = Time.time;
+                player.TakeDamage(enemyData.attackPower);
+                ////Debug.Log($"{enemyData.enemyName} attacks the player with melee attack.");
+            }
+            //else
+            //{
+            //    //Debug.Log("Melee not attacking");
+            //}
         }
-        //else
-        //{
-        //    Debug.Log("Melee not attacking");
-        //}
     }
+
 }

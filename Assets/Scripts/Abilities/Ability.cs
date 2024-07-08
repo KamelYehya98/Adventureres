@@ -1,5 +1,9 @@
 using UnityEngine;
 
+namespace Assets.Scripts.Abilities
+{
+
+}
 public abstract class Ability : ScriptableObject
 {
     public string abilityName;

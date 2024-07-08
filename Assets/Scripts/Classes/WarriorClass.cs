@@ -1,35 +1,50 @@
+using Assets.Scripts.Managers;
+using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 
-public class WarriorClass : PlayerClass
+namespace Assets.Scripts.Classes
 {
-    [SerializeField]
-    private PlayerClassData _warriorData;
-
-    private new void Start()
+    public class WarriorClass : PlayerClass
     {
-        Initialize(_warriorData);
-
-        inputActions.Player.Attack.performed += ctx => Attack();
-        inputActions.Player.SpecialAbility.performed += ctx => SpecialAbility();
-    }
-
-    public override void Attack()
-    {
-        if (basicAttack != null && _warriorData.mana >= basicAttack.manaCost)
+        private PlayerClassData _data;
+        private new void Start()
         {
-            _warriorData.mana -= basicAttack.manaCost;
-            basicAttack.Activate(gameObject);
-            Debug.Log($"{_warriorData.className} performs {basicAttack.abilityName}.");
+            base.Start();
+            Debug.Log("Entered Start at MageClass");
+
+            _data = FindObjectOfType<ClassManager>().warriorData;
+
+            Initialize(_data);
+            InitializeComponents();
         }
-    }
 
-    public override void SpecialAbility()
-    {
-        if (specialAbility != null && _warriorData.mana >= specialAbility.manaCost)
+        public override void Attack()
         {
-            _warriorData.mana -= specialAbility.manaCost;
-            specialAbility.Activate(gameObject);
-            Debug.Log($"{_warriorData.className} performs {specialAbility.abilityName}.");
+            if (basicAttack != null && mana >= basicAttack.manaCost)
+            {
+                mana -= basicAttack.manaCost;
+                basicAttack.Activate(gameObject);
+                //Debug.Log($"{className} performs {basicAttack.abilityName}.");
+            }
+        }
+
+        public override void SpecialAbility()
+        {
+            if (specialAbility != null && mana >= specialAbility.manaCost)
+            {
+                mana -= specialAbility.manaCost;
+                specialAbility.Activate(gameObject);
+                //Debug.Log($"{className} performs {specialAbility.abilityName}.");
+            }
+        }
+
+        protected void InitializeComponents()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
+            _rb = GetComponent<Rigidbody2D>();
+
+            _animator.runtimeAnimatorController = _data.animatorController;
         }
     }
 }

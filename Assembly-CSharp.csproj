@@ -65,26 +65,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Abilities\FireBall.cs" />
+    <Compile Include="Assets\Scripts\Classes\PlayerClassManager.cs" />
+    <Compile Include="Assets\Scripts\Constants\GameConstants.cs" />
     <Compile Include="Assets\Scripts\Enemies\MeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\PlayerClassData.cs" />
     <Compile Include="Assets\Scripts\Abilities\FireballAbility.cs" />
-    <Compile Include="Assets\Scripts\GameManager\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Classes\PlayerClass.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\GameData.cs" />
     <Compile Include="Assets\Scripts\Classes\ClassSelectionButton.cs" />
     <Compile Include="Assets\Input Actions\PlayerControls.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Classes\MarksmanClass.cs" />
     <Compile Include="Assets\Scripts\Abilities\Ability.cs" />
     <Compile Include="Assets\Scripts\Classes\WarriorClass.cs" />
     <Compile Include="Assets\Scripts\Classes\MageClass.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputReader.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputInvoker.cs" />
-    <Compile Include="Assets\Scripts\Classes\ClassManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\ClassManager.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\SkillModifierData.cs" />
+    <Compile Include="Assets\Scripts\Skills\PlayerSkills.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1126,8 +1129,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

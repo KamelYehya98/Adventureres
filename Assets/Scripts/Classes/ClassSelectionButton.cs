@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Managers;
 
-public class ClassSelectionButton : MonoBehaviour
+namespace Assets.Scripts.Classes
 {
-    public int classIndex;
-
-    private void Start()
+    public class ClassSelectionButton : MonoBehaviour
     {
-        GetComponent<Button>().onClick.AddListener(OnButtonClick);
-    }
+        public int classIndex;
 
-    public void OnButtonClick()
-    {
-        GameManager.Instance.SelectClass(classIndex);
+        //private void Start()
+        //{
+        //    GetComponent<Button>().onClick.AddListener(OnButtonClick);
+        //}
+
+        //public void OnButtonClick()
+        //{
+        //    GameManager.Instance.SelectClass(classIndex);
+        //}
     }
 }

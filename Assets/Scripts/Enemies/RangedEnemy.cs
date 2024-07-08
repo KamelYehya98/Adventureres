@@ -1,26 +1,31 @@
+using Assets.Scripts.Classes;
 using UnityEngine;
 
-public class RangedEnemy : Enemy
+namespace Assets.Scripts.Enemiies
 {
-    public GameObject projectilePrefab;
-    private Transform _firePoint;
-    
-    protected override void Attack(PlayerClass player)
+    public class RangedEnemy : Enemy
     {
-        if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
+        public GameObject projectilePrefab;
+        private Transform _firePoint;
+
+        protected override void Attack(PlayerClass player)
         {
-            enemyData.lastAttackTime = Time.time;
-            ShootProjectile(player);
-            Debug.Log($"{enemyData.enemyName} attacks the player with ranged attack.");
+            if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
+            {
+                enemyData.lastAttackTime = Time.time;
+                ShootProjectile(player);
+                ////Debug.Log($"{enemyData.enemyName} attacks the player with ranged attack.");
+            }
+        }
+
+        private void ShootProjectile(PlayerClass player)
+        {
+            _firePoint = GetComponent<Transform>();
+
+            GameObject projectile = Instantiate(projectilePrefab, _firePoint.position, _firePoint.rotation);
+            Projectile projectileComponent = projectile.GetComponent<Projectile>();
+            projectileComponent.Initialize(player.transform);
         }
     }
 
-    private void ShootProjectile(PlayerClass player)
-    {
-        _firePoint = GetComponent<Transform>();
-
-        GameObject projectile = Instantiate(projectilePrefab, _firePoint.position, _firePoint.rotation);
-        Projectile projectileComponent = projectile.GetComponent<Projectile>();
-        projectileComponent.Initialize(player.transform);
-    }
 }

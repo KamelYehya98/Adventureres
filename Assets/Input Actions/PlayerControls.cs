@@ -62,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchClassRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""683c0fb2-1fb9-4f94-8bc9-587507525046"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchClassLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce58f3b0-ed01-4629-aa2b-1a1afbea934f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,6 +203,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SpecialAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07c262ec-0413-4334-b8c5-c5254a75668a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchClassRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac3ffc28-95a1-4670-83cd-6a5f54db3a13"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchClassLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -225,6 +265,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_SpecialAbility = m_Player.FindAction("SpecialAbility", throwIfNotFound: true);
+        m_Player_SwitchClassRight = m_Player.FindAction("SwitchClassRight", throwIfNotFound: true);
+        m_Player_SwitchClassLeft = m_Player.FindAction("SwitchClassLeft", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -293,6 +335,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_SpecialAbility;
+    private readonly InputAction m_Player_SwitchClassRight;
+    private readonly InputAction m_Player_SwitchClassLeft;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -301,6 +345,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @SpecialAbility => m_Wrapper.m_Player_SpecialAbility;
+        public InputAction @SwitchClassRight => m_Wrapper.m_Player_SwitchClassRight;
+        public InputAction @SwitchClassLeft => m_Wrapper.m_Player_SwitchClassLeft;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -322,6 +368,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SpecialAbility.started += instance.OnSpecialAbility;
             @SpecialAbility.performed += instance.OnSpecialAbility;
             @SpecialAbility.canceled += instance.OnSpecialAbility;
+            @SwitchClassRight.started += instance.OnSwitchClassRight;
+            @SwitchClassRight.performed += instance.OnSwitchClassRight;
+            @SwitchClassRight.canceled += instance.OnSwitchClassRight;
+            @SwitchClassLeft.started += instance.OnSwitchClassLeft;
+            @SwitchClassLeft.performed += instance.OnSwitchClassLeft;
+            @SwitchClassLeft.canceled += instance.OnSwitchClassLeft;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -338,6 +390,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SpecialAbility.started -= instance.OnSpecialAbility;
             @SpecialAbility.performed -= instance.OnSpecialAbility;
             @SpecialAbility.canceled -= instance.OnSpecialAbility;
+            @SwitchClassRight.started -= instance.OnSwitchClassRight;
+            @SwitchClassRight.performed -= instance.OnSwitchClassRight;
+            @SwitchClassRight.canceled -= instance.OnSwitchClassRight;
+            @SwitchClassLeft.started -= instance.OnSwitchClassLeft;
+            @SwitchClassLeft.performed -= instance.OnSwitchClassLeft;
+            @SwitchClassLeft.canceled -= instance.OnSwitchClassLeft;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -407,6 +465,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSpecialAbility(InputAction.CallbackContext context);
+        void OnSwitchClassRight(InputAction.CallbackContext context);
+        void OnSwitchClassLeft(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

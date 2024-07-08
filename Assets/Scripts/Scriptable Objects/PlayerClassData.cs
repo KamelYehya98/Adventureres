@@ -1,15 +1,25 @@
+using Assets.Scripts.Classes;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerClassData", menuName = "ScriptableObjects/PlayerClassData")]
-public class PlayerClassData : ScriptableObject
+namespace Assets.Scripts.ScriptableObjects
 {
-    public string className;
-    public int health;
-    public int mana;
-    public int attackPower;
-    public int defense;
-    public int movementSpeed;
-    public Ability basicAttack;
-    public Ability specialAbility;
-    public GameObject prefab;
+    [CreateAssetMenu(fileName = "PlayerClassData", menuName = "ScriptableObjects/PlayerClassData")]
+    public class PlayerClassData : ScriptableObject
+    {
+        public string className;
+        public float vitality;
+        public float regeneration;
+        public float attackPower;
+        public float criticalStrike;
+        public float defense;
+        public float agility;
+        public float mana;
+        public SkillModifierData skillModifier;
+        public Ability basicAttack;
+        public Ability specialAbility;
+        public GameObject prefab;
+        public RuntimeAnimatorController animatorController;
+        public PlayerClass classComponent;
+        public System.Type classType;
+    }
 }

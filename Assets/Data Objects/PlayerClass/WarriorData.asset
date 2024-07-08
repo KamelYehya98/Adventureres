@@ -10,14 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 773967470da16b04a88f75cce01625b4, type: 3}
-  m_Name: MageData
+  m_Name: WarriorData
   m_EditorClassIdentifier: 
-  className: Mage
-  health: 100
-  mana: 200
+  className: Warrior
+  vitality: 150
+  regeneration: 0.2
   attackPower: 10
-  defense: 6
-  movementSpeed: 4
+  criticalStrike: 0.02
+  defense: 10
+  agility: 4
+  mana: 80
+  skillModifier: {fileID: 11400000, guid: b357914ec52655343a8e5eb8b1e4e0be, type: 2}
   basicAttack: {fileID: 0}
   specialAbility: {fileID: 0}
-  prefab: {fileID: 2700383917992796796, guid: c4b0aedeb4f726148a15b6ba07a58377, type: 3}
+  prefab: {fileID: 6786811598311509972, guid: dbcbf4c6888577f48841d5eb80270b33, type: 3}
+  animatorController: {fileID: 9100000, guid: d63e2cee8fa3dab46a0ba1e088b77fb3, type: 2}
+  classComponent: {fileID: 0}

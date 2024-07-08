@@ -1,23 +1,27 @@
+using Assets.Scripts.Enemiies;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+namespace Assets.Scripts.Abilities
 {
-    public float speed;
-    public float damage;
-
-    public void Launch(Vector3 direction)
+    public class Fireball : MonoBehaviour
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.velocity = direction * speed;
-    }
+        public float speed;
+        public float damage;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
+        public void Launch(Vector3 direction)
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.TakeDamage(damage);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = direction * speed;
         }
-        Destroy(gameObject);
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                enemy.TakeDamage(damage);
+            }
+            Destroy(gameObject);
+        }
     }
 }

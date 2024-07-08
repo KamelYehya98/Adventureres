@@ -1,36 +1,41 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Classes;
+using UnityEngine;
 
-public class Projectile : MonoBehaviour
+namespace Assets.Scripts.Enemiies
 {
-    public float speed;
-    public float damage;
-    private Vector3 _direction;
-    private float _lifetime = 2.0f; // Time in seconds before the projectile is destroyed
-
-    public void Initialize(Transform targetTransform)
+    public class Projectile : MonoBehaviour
     {
-        _direction = (targetTransform.position - transform.position).normalized;
-        Destroy(gameObject, _lifetime);
-    }
+        public float speed;
+        public float damage;
+        private Vector3 _direction;
+        private float _lifetime = 2.0f; // Time in seconds before the projectile is destroyed
 
-    private void Update()
-    {
-        transform.position += speed * Time.deltaTime * _direction;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Projectile collided with: " + other.gameObject.name);
-
-        if (other.TryGetComponent<PlayerClass>(out var player))
+        public void Initialize(Transform targetTransform)
         {
-            Debug.Log("Projectile collided with player");
-            player.TakeDamage(damage);
-            Destroy(gameObject);
+            _direction = (targetTransform.position - transform.position).normalized;
+            Destroy(gameObject, _lifetime);
         }
-        else if (other.CompareTag("Obstacle"))
+
+        private void Update()
         {
-            Destroy(gameObject);
+            transform.position += speed * Time.deltaTime * _direction;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            //Debug.Log("Projectile collided with: " + other.gameObject.name);
+
+            if (other.TryGetComponent<PlayerClass>(out var player))
+            {
+                //Debug.Log("Projectile collided with player");
+                player.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+            else if (other.CompareTag("Obstacle"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
+
 }
