@@ -8,6 +8,7 @@ namespace Assets.Scripts.Classes
     public abstract class PlayerClass : MonoBehaviour
     {
         public string className;  // Made public for easier debugging
+
         protected float mana;
 
         protected PlayerSkills skills;

@@ -11,6 +11,8 @@ namespace Assets.Scripts.Enemiies
         public EnemyData enemyData;
         protected NavMeshAgent navMeshAgent;
         protected Transform targetPlayerTransform;
+        protected Vector3 lastPlayerPosition;
+
         public LayerMask obstacleMask;
 
         private bool _hasSpottedPlayer = false;
@@ -23,13 +25,6 @@ namespace Assets.Scripts.Enemiies
 
         protected virtual void Start()
         {
-            var targetPlayer = GameObject.FindWithTag("Player");
-
-            if (targetPlayer != null)
-            {
-                targetPlayerTransform = GameObject.FindWithTag("Player").transform;
-            }
-
             enemyData.lastAttackTime = 0;
         }
 
@@ -46,6 +41,7 @@ namespace Assets.Scripts.Enemiies
                     {
                         _hasSpottedPlayer = true;
                         MoveTowardsPlayer();
+                        lastPlayerPosition = targetPlayerTransform.position;
                     }
                     else if (_hasSpottedPlayer)
                     {
@@ -54,8 +50,18 @@ namespace Assets.Scripts.Enemiies
                 }
                 else
                 {
-                    navMeshAgent.isStopped = true;
-                    _hasSpottedPlayer = false; // Reset spotting if the player is out of range
+                    if(transform.position == lastPlayerPosition)
+                    {
+                        navMeshAgent.isStopped = true;
+                        _hasSpottedPlayer = false; // Reset spotting if the player is out of range
+                    }
+                    else
+                    {
+                        navMeshAgent.isStopped = false;
+                        navMeshAgent.SetDestination(lastPlayerPosition);
+                        navMeshAgent.stoppingDistance = enemyData.stoppingDistance;
+                    }
+
                 }
             }
         }
@@ -99,6 +105,7 @@ namespace Assets.Scripts.Enemiies
             {
                 navMeshAgent.isStopped = false; // Allow the agent to move
                 navMeshAgent.SetDestination(targetPlayerTransform.position);
+
                 if (IsPlayerInLineOfSight())
                 {
                     // Only attack if there is a line of sight

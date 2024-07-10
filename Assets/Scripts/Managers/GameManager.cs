@@ -1,6 +1,8 @@
 using Assets.Scripts.Classes;
+using Assets.Scripts.Player;
 using Assets.Scripts.ScriptableObjects;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,8 +22,14 @@ namespace Assets.Scripts.Managers
         public GameObject playerPrefab;
         private List<PlayerControls> playerControlsList = new();
         private List<GameObject> playerInstances = new();
-
+        private List<PlayerControlScheme> playerControlSchemesList = new();
         public GameData GameData => _gameData;
+
+        private class PlayerControlScheme
+        {
+            public string Name { get; set; }
+            public bool IsActive { get; set; }
+        }
 
         #endregion
 
@@ -50,15 +58,29 @@ namespace Assets.Scripts.Managers
                 DontDestroyOnLoad(gameObj);
             }
         }
-
         #endregion
 
         #region Unity Methods
 
         private void Start()
         {
+            playerControlSchemesList = new()
+            {
+                new PlayerControlScheme()
+                {
+                    Name = "Player1ControlScheme",
+                    IsActive = true
+                },
+                new PlayerControlScheme()
+                {
+                    Name = "Player2ControlScheme",
+                    IsActive = true
+                }
+            };
+
             AddPlayer();
             AddPlayer();
+            
         }
 
         private void Awake()
@@ -94,6 +116,16 @@ namespace Assets.Scripts.Managers
 
         #region Scene Loading
 
+        public bool HasAvailableControlScheme()
+        {
+            return playerControlSchemesList != null && playerControlSchemesList.Any(x => x.IsActive);
+        }
+
+        private string GetAvailableControlScheme()
+        {
+            return playerControlSchemesList?.FirstOrDefault(x => x.IsActive)?.Name;
+        }
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "SampleScene")
@@ -102,49 +134,55 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        public void AddPlayer()
+        private void DeactivateControlScheme(string schemeName)
         {
-            Vector3 startPosition = new Vector3(playerInstances.Count * 2, 0, 0);
-
-            GameObject player = Instantiate(playerPrefab, startPosition, Quaternion.identity);
-
-            if(player.TryGetComponent(out PlayerInputController playerInputController))
+            if (playerControlSchemesList != null && playerControlSchemesList.Any())
             {
-                playerControlsList.Add(playerInputController.inputActions);
+                foreach (var scheme in playerControlSchemesList)
+                {
+                    if (scheme.Name == schemeName)
+                    {
+                        scheme.IsActive = false;
+                        return;
+                    }
+                }
             }
 
-            PlayerClassManager playerClassManager = player.GetComponent<PlayerClassManager>();
-
-            // Alternate classes for new players for demonstration
-            PlayerClassData classData = (playerInstances.Count % 2 == 0) ? classManager.mageData : classManager.warriorData;
-
-            playerInstances.Add(player);
+            Debug.LogError("Control Scheme not found, failed to deactivate");
         }
 
-        //public void SelectClass(int classIndex)
-        //{
-        //    switch (classIndex)
-        //    {
-        //        case 0:
-        //            _selectedClassData = classManager.mageData;
-        //            break;
-        //        case 1:
-        //            _selectedClassData = classManager.warriorData;
-        //            break;
-        //        // Add other cases for different classes
-        //        default:
-        //            //Debug.LogError("Invalid class index selected.");
-        //            return;
-        //    }
-        //    LoadGameScene();
-        //}
+        public void AddPlayer()
+        {
+            if (!HasAvailableControlScheme())
+            {
+                Debug.LogError("No control schemes available for a new player");
+                return;
+            }
 
-        //private void LoadGameScene()
-        //{
-        //    SceneManager.LoadScene("SampleScene");
-        //}
+            string controlScheme = GetAvailableControlScheme();
 
+            if (!string.IsNullOrEmpty(controlScheme))
+            {
+                DeactivateControlScheme(controlScheme);
 
+                Vector3 startPosition = new Vector3(playerInstances.Count * 2, 0, 0);
+
+                GameObject player = Instantiate(playerPrefab, startPosition, Quaternion.identity);
+
+                if (player.TryGetComponent(out PlayerInputController playerInputController))
+                {
+                    playerInputController.AssignControlScheme(controlScheme);
+                    playerControlsList.Add(playerInputController.inputActions);
+                }
+
+                PlayerClassManager playerClassManager = player.GetComponent<PlayerClassManager>();
+
+                // Alternate classes for new players for demonstration
+                PlayerClassData classData = (playerInstances.Count % 2 == 0) ? classManager.mageData : classManager.warriorData;
+
+                playerInstances.Add(player);
+            }
+        }
 
         #endregion
     }
