@@ -70,7 +70,13 @@
     <Compile Include="Assets\Scripts\Enemies\MeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
+    <Compile Include="Assets\Scripts\Managers\DemoScript.cs" />
+    <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
+    <Compile Include="Assets\Scripts\Player\CraftingSystem.cs" />
+    <Compile Include="Assets\Scripts\Player\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\CraftingRecipeData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\EnemyData.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\ItemData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\PlayerClassData.cs" />
     <Compile Include="Assets\Scripts\Abilities\FireballAbility.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
@@ -88,6 +94,10 @@
     <Compile Include="Assets\Scripts\Managers\ClassManager.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\SkillModifierData.cs" />
     <Compile Include="Assets\Scripts\Skills\PlayerSkills.cs" />
+    <Compile Include="Assets\Scripts\UI\CraftingUI.cs" />
+    <Compile Include="Assets\Scripts\UI\InventoryItem.cs" />
+    <Compile Include="Assets\Scripts\UI\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

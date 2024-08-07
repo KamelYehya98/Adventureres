@@ -1,5 +1,4 @@
 using Assets.Scripts.Classes;
-using Assets.Scripts.Player;
 using Assets.Scripts.ScriptableObjects;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,19 +67,17 @@ namespace Assets.Scripts.Managers
             {
                 new PlayerControlScheme()
                 {
-                    Name = "Player1ControlScheme",
+                    Name = "Player2ControlScheme",
                     IsActive = true
                 },
                 new PlayerControlScheme()
                 {
-                    Name = "Player2ControlScheme",
+                    Name = "Player1ControlScheme",
                     IsActive = true
                 }
             };
 
-            AddPlayer();
-            AddPlayer();
-            
+            AddPlayer();            
         }
 
         private void Awake()
