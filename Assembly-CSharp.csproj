@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\Managers\DemoScript.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\PlayerCameraManager.cs" />
     <Compile Include="Assets\Scripts\Player\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\Player\Inventory.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\CraftingRecipeData.cs" />

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &749754495644913135
+--- !u!1 &8985909353660968221
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1357108148935202294}
-  - component: {fileID: 7246120727593687203}
+  - component: {fileID: 6836648603698159064}
+  - component: {fileID: 834529693643175615}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: PlayerCameraManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1357108148935202294
+--- !u!4 &6836648603698159064
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749754495644913135}
+  m_GameObject: {fileID: 8985909353660968221}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 321.26688, y: 215.6189, z: -0.47214377}
+  m_LocalPosition: {x: 6.196149, y: -3.4502656, z: 0.614183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7246120727593687203
+--- !u!114 &834529693643175615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749754495644913135}
+  m_GameObject: {fileID: 8985909353660968221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff027b8158e7864b9e7e06ea5faec3f, type: 3}
+  m_Script: {fileID: 11500000, guid: dc783d48e44e2c046b30cd95fccf5480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameData: {fileID: 11400000, guid: 3287b47b2744a304c9e7fd84c87ead96, type: 2}
-  classManager: {fileID: 0}
-  cameraManager: {fileID: 0}
-  playerPrefab: {fileID: 7956844346490765429, guid: dbcbf4c6888577f48841d5eb80270b33, type: 3}
+  playerCameras: []
+  mainCameras: []

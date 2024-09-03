@@ -1,5 +1,6 @@
 using Assets.Scripts.Classes;
 using Assets.Scripts.ScriptableObjects;
+using Cinemachine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,10 +19,15 @@ namespace Assets.Scripts.Managers
         [SerializeField]
         public ClassManager classManager;
 
+        [SerializeField]
+        public PlayerCameraManager cameraManager;
+
         public GameObject playerPrefab;
         private List<PlayerControls> playerControlsList = new();
         private List<GameObject> playerInstances = new();
         private List<PlayerControlScheme> playerControlSchemesList = new();
+        private Camera currentActiveCamera;
+
         public GameData GameData => _gameData;
 
         private class PlayerControlScheme
@@ -176,6 +182,46 @@ namespace Assets.Scripts.Managers
 
                 // Alternate classes for new players for demonstration
                 PlayerClassData classData = (playerInstances.Count % 2 == 0) ? classManager.mageData : classManager.warriorData;
+
+                Camera mainCam = player.GetComponentInChildren<Camera>(true);
+                CinemachineVirtualCamera vcam = player.GetComponentInChildren<CinemachineVirtualCamera>(true);
+
+                if (mainCam == null)
+                {
+                    Debug.LogError("Player's Camera is null");
+                    return;
+                }
+                if (vcam == null)
+                {
+                    Debug.LogError("Player's CinemachineVirtualCamera is null");
+                    return;
+                }
+
+                vcam.Follow = playerClassManager.transform;  // Ensure the virtual camera follows the player
+                vcam.LookAt = playerClassManager.transform;  // Optional: Ensure the virtual camera looks at the player
+
+                if (currentActiveCamera != null)
+                {
+                    currentActiveCamera.GetComponent<AudioListener>().enabled = false;
+                }
+
+                mainCam.enabled = true;
+                mainCam.GetComponent<AudioListener>().enabled = true;
+                currentActiveCamera = mainCam;
+
+                cameraManager.AddPlayerCamera(vcam, mainCam);
+
+                Canvas canvas = player.GetComponentInChildren<Canvas>(true);
+
+                if(canvas == null)
+                {
+                    Debug.LogError("Player's Canvas is null");
+                    return;
+                }
+
+                canvas.worldCamera = mainCam;
+                canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.sortingLayerName = "Background";
 
                 playerInstances.Add(player);
             }
