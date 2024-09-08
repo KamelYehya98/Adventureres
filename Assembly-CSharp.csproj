@@ -71,7 +71,6 @@
     <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\Managers\AnimationManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\CharacterCustomizationManager.cs" />
     <Compile Include="Assets\Scripts\Managers\DemoScript.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerCameraManager.cs" />
