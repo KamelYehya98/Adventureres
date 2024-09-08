@@ -1,6 +1,7 @@
 using Assets.Scripts.Managers;
 using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Skills;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Classes
@@ -17,11 +18,11 @@ namespace Assets.Scripts.Classes
         public Ability specialAbility;
 
         protected Rigidbody2D _rb;
-        protected Animator _animator;
         protected SpriteRenderer _spriteRenderer;
 
         protected PlayerClassManager playerClassManager;
         protected ClassManager classManager;
+        protected AnimationManager animationManager;
 
         public void Initialize(PlayerClassData data)
         {
@@ -52,6 +53,8 @@ namespace Assets.Scripts.Classes
 
         public void Start()
         {
+            animationManager = new AnimationManager();
+
             if (!TryGetComponent(out playerClassManager))
             {
                 Debug.LogError("PlayerClassManager not found.");
@@ -97,9 +100,11 @@ namespace Assets.Scripts.Classes
 
         public void Move(Vector2 direction)
         {
-            transform.position += skills.agility * Time.deltaTime * (Vector3)direction;
-            AdjustPlayerFacingDirection(direction);
-            AnimatePlayer(direction);
+            if(transform != null && direction != null && skills != null)
+            {
+                transform.position += skills.agility * Time.deltaTime * (Vector3)direction;
+                AdjustPlayerFacingDirection(direction);
+            }
         }
 
         private void OnSwitchClass(int direction)
@@ -115,27 +120,7 @@ namespace Assets.Scripts.Classes
                 return;
             }
 
-            if (movement.x > 0)
-            {
-                _spriteRenderer.flipX = true;
-            }
-            else if (movement.x < 0)
-            {
-                _spriteRenderer.flipX = false;
-            }
-        }
-
-        private void AnimatePlayer(Vector2 direction)
-        {
-            if (_animator == null)
-            {
-                Debug.LogError("_animator is null.");
-                return;
-            }
-
-            _animator.SetFloat("moveX", direction.x);
-            _animator.SetFloat("moveY", direction.y);
-            _animator.SetBool("isMoving", direction != Vector2.zero);
+            animationManager.ManageAnimations(_spriteRenderer, movement);
         }
 
         public void TakeDamage(float damage) { }
@@ -143,4 +128,16 @@ namespace Assets.Scripts.Classes
         public abstract void Attack();
         public abstract void SpecialAbility();
     }
+
+
+    public static class GenericAnimationStates
+    {
+        public const string IdleUp = "wolf_idle_up";
+        public const string IdleDown = "wolf_idle_down";
+        public const string IdleRight = "wolf_idle_right";
+        public const string WalkUp = "wolf_walk_up";
+        public const string WalkDown = "wolf_walk_down";
+        public const string WalkRight = "wolf_walk_right";
+    }
 }
+

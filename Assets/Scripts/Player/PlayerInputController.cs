@@ -51,10 +51,7 @@ public class PlayerInputController : MonoBehaviour
             _playerClass = GetComponent<PlayerClass>();
         }
 
-        if (moveInput != Vector2.zero)
-        {
-            _playerClass.Move(moveInput);
-        }
+        _playerClass.Move(moveInput);
     }
 
     private void OnSwitchClass(int direction)

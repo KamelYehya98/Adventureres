@@ -41,10 +41,10 @@ namespace Assets.Scripts.Classes
         protected void InitializeComponents()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
 
-            _animator.runtimeAnimatorController = _data.animatorController;
+            animationManager.SetAnimator(GetComponent<Animator>());
+            animationManager.animator.runtimeAnimatorController = _data.animatorController;
         }
     }
 }

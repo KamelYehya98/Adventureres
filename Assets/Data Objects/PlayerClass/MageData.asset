@@ -24,5 +24,5 @@ MonoBehaviour:
   basicAttack: {fileID: 0}
   specialAbility: {fileID: 0}
   prefab: {fileID: 6786811598311509972, guid: dbcbf4c6888577f48841d5eb80270b33, type: 3}
-  animatorController: {fileID: 9100000, guid: b181de6263cc2eb41b917218f3f86de1, type: 2}
+  animatorController: {fileID: 9100000, guid: 8d0a7ee106621d34aab082f75966f8c4, type: 2}
   classComponent: {fileID: 0}
