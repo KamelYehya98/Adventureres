@@ -48,7 +48,7 @@ namespace Assets.Scripts.Enemiies
                         MoveTowardsPlayer(); // Keep moving even without line of sight if the player has been spotted
                     }
                 }
-                else
+                else if(!IsPlayerInRange() && _hasSpottedPlayer)
                 {
                     if(transform.position == lastPlayerPosition)
                     {

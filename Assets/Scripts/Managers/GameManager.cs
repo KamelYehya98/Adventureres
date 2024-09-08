@@ -168,7 +168,7 @@ namespace Assets.Scripts.Managers
             {
                 DeactivateControlScheme(controlScheme);
 
-                Vector3 startPosition = new Vector3(playerInstances.Count * 2, 0, 0);
+                Vector3 startPosition = new Vector3(playerInstances.Count * 2 + 10, 0, 0);
 
                 GameObject player = Instantiate(playerPrefab, startPosition, Quaternion.identity);
 
