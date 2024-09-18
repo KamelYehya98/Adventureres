@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3324403008969344016}
   - component: {fileID: 979239237353109136}
   - component: {fileID: 4723457902798620238}
-  - component: {fileID: 6214672554613824148}
   - component: {fileID: 7463161197972915023}
   - component: {fileID: 6201996493329377317}
   - component: {fileID: -3382792917877859825}
+  - component: {fileID: 7501674218606206720}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -142,19 +142,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6214672554613824148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956844346490765429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0d5e9f620260f4a9fef5c22c9bbc25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeClass: {fileID: 0}
 --- !u!114 &7463161197972915023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833eb7534b1ee164bb94a31b4370d19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemManager: {fileID: 0}
   items: []
 --- !u!58 &-3382792917877859825
 CircleCollider2D:
@@ -216,6 +204,35 @@ CircleCollider2D:
   m_Offset: {x: -0.02721858, y: -0.70769095}
   serializedVersion: 2
   m_Radius: 0.81144166
+--- !u!114 &7501674218606206720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956844346490765429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8bbe3640c7aeb4da31d2bff1bbc4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData:
+    PlayerName: 
+    Level: 0
+    Experience: 0
+    Mana: 0
+    Skills:
+      Vitality: 100
+      Regeneration: 15
+      AttackPower: 15
+      CriticalStrike: 0.05
+      Defense: 10
+      Agility: 6
+    Inventory:
+      _keys: []
+      _values: 
+  _rb: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
 --- !u!1001 &1077732286064724717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,14 +241,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4305605696830881326}
     m_Modifications:
-    - target: {fileID: -6840077614037512964, guid: 0deb72f913b65004ab7674f989485f08, type: 3}
-      propertyPath: inventoryItemPrefab
-      value: 
-      objectReference: {fileID: 3144294903107709811, guid: 05d2e50d1b71a27499bc50160a495ab3, type: 3}
-    - target: {fileID: -6840077614037512964, guid: 0deb72f913b65004ab7674f989485f08, type: 3}
-      propertyPath: inventorySlots.Array.size
-      value: 28
-      objectReference: {fileID: 0}
     - target: {fileID: -6840077614037512964, guid: 0deb72f913b65004ab7674f989485f08, type: 3}
       propertyPath: inventorySlots.Array.data[0]
       value: 
@@ -810,7 +819,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6656940465012095021, guid: c7f263bc5a6100e4f8637ecc603135d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6616622194751362335}
   m_SourcePrefab: {fileID: 100100000, guid: c7f263bc5a6100e4f8637ecc603135d6, type: 3}
 --- !u!114 &483509721651000930 stripped
 MonoBehaviour:
@@ -834,6 +846,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cc2dd6b5e06f2469be981b88278fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &976253706109635553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6656940465012095021, guid: c7f263bc5a6100e4f8637ecc603135d6, type: 3}
+  m_PrefabInstance: {fileID: 5903776592289264588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6616622194751362335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976253706109635553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833eb7534b1ee164bb94a31b4370d19e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemManager: {fileID: 8556387819593511186, guid: 1eacda43982ecd4499e8d6f020de3067, type: 3}
+  items: []
 --- !u!224 &1690476845942047268 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5087847378313867752, guid: c7f263bc5a6100e4f8637ecc603135d6, type: 3}

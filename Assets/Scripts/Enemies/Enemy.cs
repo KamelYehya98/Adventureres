@@ -77,7 +77,7 @@ namespace Assets.Scripts.Enemiies
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<PlayerClass>(out var player))
+            if (other.TryGetComponent<PlayerController>(out var player))
             {
                 Attack(player);
             }
@@ -109,7 +109,7 @@ namespace Assets.Scripts.Enemiies
                 if (IsPlayerInLineOfSight())
                 {
                     // Only attack if there is a line of sight
-                    Attack(targetPlayerTransform.GetComponent<PlayerClass>());
+                    Attack(targetPlayerTransform.GetComponent<PlayerController>());
                 }
                 else
                 {
@@ -124,14 +124,14 @@ namespace Assets.Scripts.Enemiies
             }
         }
 
-        protected abstract void Attack(PlayerClass player);
+        protected abstract void Attack(PlayerController player);
 
         private void FindClosestPlayer()
         {
-            PlayerClass[] players = FindObjectsOfType<PlayerClass>();
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
             if (players.Length == 0) return;
 
-            PlayerClass closestPlayer = players.OrderBy(p => Vector2.Distance(transform.position, p.transform.position)).FirstOrDefault();
+            PlayerController closestPlayer = players.OrderBy(p => Vector2.Distance(transform.position, p.transform.position)).FirstOrDefault();
             if (closestPlayer != null)
             {
                 targetPlayerTransform = closestPlayer.transform;

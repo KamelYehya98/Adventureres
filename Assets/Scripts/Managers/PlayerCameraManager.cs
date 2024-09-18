@@ -1,20 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 
 namespace Assets.Scripts.Managers
 {
-    using System.Collections.Generic;
-    using UnityEngine;
-    using Cinemachine;
-
     public class PlayerCameraManager : MonoBehaviour
     {
         public List<CinemachineVirtualCamera> playerCameras = new List<CinemachineVirtualCamera>();
         public List<Camera> mainCameras = new List<Camera>();
 
+        private static PlayerCameraManager _instance;
+        public static PlayerCameraManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    SetupInstance();
+                }
+                return _instance;
+            }
+        }
+
+        private static void SetupInstance()
+        {
+            _instance = FindObjectOfType<PlayerCameraManager>();
+            if (_instance == null)
+            {
+                GameObject gameObj = new GameObject("PlayerCameraManager");
+                _instance = gameObj.AddComponent<PlayerCameraManager>();
+                DontDestroyOnLoad(gameObj);
+            }
+        }
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else if (_instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
         private void Start()
         {
+            SetupInstance();
             SetupCameras();
         }
 

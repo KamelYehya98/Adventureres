@@ -5,7 +5,7 @@ namespace Assets.Scripts.Enemiies
 {
     public class MeleeEnemy : Enemy
     {
-        protected override void Attack(PlayerClass player)
+        protected override void Attack(PlayerController player)
         {
             if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
             {

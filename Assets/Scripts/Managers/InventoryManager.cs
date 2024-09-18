@@ -1,11 +1,15 @@
-﻿using Assets.Scripts.Scriptable_Objects;
-using Assets.Scripts.UI;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Scriptable_Objects;
+using Assets.Scripts.UI.Inventory;
 using UnityEngine;
 
 namespace Assets.Scripts.Managers
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : MonoBehaviour, IDataPersistence
     {
+        [SerializeField]
+        public ItemsManager itemManager;
+
         private int _maxStackCount = 4;
         public InventorySlot[] inventorySlots;
         public GameObject inventoryItemPrefab;
@@ -98,6 +102,51 @@ namespace Assets.Scripts.Managers
             return null;
         }
 
+        public void LoadData(GameData gameData)
+        {
+            Debug.Log("Called Load for inventoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 
+            if(gameData.PlayerData.Inventory != null)
+            {
+                Debug.Log("Inventory not nulllllllllllllllllllllllllllll");
+
+                foreach (var  item in gameData.PlayerData.Inventory)
+                {
+                    ItemData itemData = itemManager.GetItem(item.Key.Id);
+
+                    InventorySlot slot = inventorySlots[item.Key.Index];
+
+                    SpawnNewItem(itemData, slot);
+
+                    InventoryItem inventoryItem = slot.GetComponentInChildren<InventoryItem>();
+
+                    if(inventoryItem != null)
+                    {
+                        inventoryItem.count = item.Value;
+                    }
+                }
+            }
+        }
+
+        public void SaveData(GameData gameData)
+        {
+            gameData.PlayerData.Inventory = new();
+
+            if(inventorySlots != null )
+            {
+                for(int i = 0; i<inventorySlots.Length; i++)
+                {
+                    InventorySlot slot = inventorySlots[i];
+                    InventoryItem inventoryItem = slot.GetComponentInChildren<InventoryItem>();
+
+                    if(inventoryItem != null && inventoryItem.item != null)
+                    {
+                        InventoryItemData inventoryItemData = new(inventoryItem.item.Id, i);
+                        Debug.Log("Item Id: " + inventoryItemData.Id + " --- Item Index: " + inventoryItemData.Index);
+                        gameData.PlayerData.Inventory.Add(inventoryItemData, inventoryItem.count);
+                    }
+                }
+            }
+        }
     }
 }

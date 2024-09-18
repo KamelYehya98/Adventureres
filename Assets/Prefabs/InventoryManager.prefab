@@ -44,5 +44,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fee926cff6c8d4bb52a67a9bfcbc71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySlots: []
+  itemManager: {fileID: 8556387819593511186, guid: 1eacda43982ecd4499e8d6f020de3067, type: 3}
+  inventorySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   inventoryItemPrefab: {fileID: 3144294903107709811, guid: 05d2e50d1b71a27499bc50160a495ab3, type: 3}

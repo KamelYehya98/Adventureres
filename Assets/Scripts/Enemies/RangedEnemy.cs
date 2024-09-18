@@ -8,7 +8,7 @@ namespace Assets.Scripts.Enemiies
         public GameObject projectilePrefab;
         private Transform _firePoint;
 
-        protected override void Attack(PlayerClass player)
+        protected override void Attack(PlayerController player)
         {
             if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
             {
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Enemiies
             }
         }
 
-        private void ShootProjectile(PlayerClass player)
+        private void ShootProjectile(PlayerController player)
         {
             _firePoint = GetComponent<Transform>();
 

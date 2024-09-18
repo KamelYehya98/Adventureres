@@ -65,41 +65,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Abilities\FireBall.cs" />
-    <Compile Include="Assets\Scripts\Classes\PlayerClassManager.cs" />
     <Compile Include="Assets\Scripts\Constants\GameConstants.cs" />
+    <Compile Include="Assets\Scripts\Data\GlobalGameData.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerDataConverter.cs" />
     <Compile Include="Assets\Scripts\Enemies\MeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\Managers\AnimationManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\DemoScript.cs" />
+    <Compile Include="Assets\Scripts\Managers\DataPersistenceManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\FileDataManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GlobalGameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\IDataPersistence.cs" />
+    <Compile Include="Assets\Scripts\Managers\InventoryDemoScript.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\ItemsManager.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerCameraManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\PlayerDataManager.cs" />
+    <Compile Include="Assets\Scripts\Data\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Player\CraftingSystem.cs" />
     <Compile Include="Assets\Scripts\Player\Inventory.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\CraftingRecipeData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemData.cs" />
-    <Compile Include="Assets\Scripts\Scriptable Objects\PlayerClassData.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Abilities\FireballAbility.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Classes\PlayerClass.cs" />
-    <Compile Include="Assets\Scripts\Scriptable Objects\GameData.cs" />
-    <Compile Include="Assets\Scripts\Classes\ClassSelectionButton.cs" />
+    <Compile Include="Assets\Scripts\Classes\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Data\GameData.cs" />
     <Compile Include="Assets\Input Actions\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Abilities\Ability.cs" />
-    <Compile Include="Assets\Scripts\Classes\WarriorClass.cs" />
-    <Compile Include="Assets\Scripts\Classes\MageClass.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputReader.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputInvoker.cs" />
-    <Compile Include="Assets\Scripts\Managers\ClassManager.cs" />
+    <Compile Include="Assets\Scripts\Scriptable Objects\ScriptableObjectBase.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\SkillModifierData.cs" />
-    <Compile Include="Assets\Scripts\Skills\PlayerSkills.cs" />
-    <Compile Include="Assets\Scripts\UI\CraftingUI.cs" />
-    <Compile Include="Assets\Scripts\UI\InventoryItem.cs" />
-    <Compile Include="Assets\Scripts\UI\InventorySlot.cs" />
-    <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\CraftingUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventoryItem.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\ConfirmationPopupMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\CreatePlayerMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\Menu.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\SaveSlot.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu\SaveSlotsMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1153,5 +1163,8 @@
     <ProjectCapability Remove="ReferenceManagerCOM" />
     <ProjectCapability Remove="AssemblyReferences" />
     <ProjectCapability Remove="ReferenceManagerAssemblies" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

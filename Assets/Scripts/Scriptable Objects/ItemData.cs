@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json;
+using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Scriptable_Objects
 {
     [CreateAssetMenu(fileName = "ItemData", menuName = "ScriptableObjects/ItemData")]
-    public class ItemData : ScriptableObject
+    public class ItemData : ScriptableObjectBase
     {
+
         [Header("Only Gameplay")]
         public ItemType type;
         public ActionType actionType;
@@ -15,6 +18,7 @@ namespace Assets.Scripts.Scriptable_Objects
         public bool stackable = true;
 
         [Header("Both")]
+        [JsonIgnore]
         public Sprite image;
     }
 

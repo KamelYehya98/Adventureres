@@ -25,7 +25,7 @@ namespace Assets.Scripts.Enemiies
         {
             //Debug.Log("Projectile collided with: " + other.gameObject.name);
 
-            if (other.TryGetComponent<PlayerClass>(out var player))
+            if (other.TryGetComponent<PlayerController>(out var player))
             {
                 //Debug.Log("Projectile collided with player");
                 player.TakeDamage(damage);

@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Scriptable_Objects;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Managers;
+using Assets.Scripts.Scriptable_Objects;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +8,14 @@ namespace Assets.Scripts.Player
 {
     public class Inventory : MonoBehaviour
     {
-        public List<ItemData> items = new List<ItemData>();
-        public Dictionary<ItemData, int> itemCounts = new Dictionary<ItemData, int>();
+        [SerializeField]
+        public ItemsManager itemManager;
+
+        public List<ItemData> items;
+        public Dictionary<ItemData, int> itemCounts;
         public delegate void OnInventoryChanged();
         public OnInventoryChanged onInventoryChangedCallback;
-
+        
         public void AddItem(ItemData item, int count = 1)
         {
             if (itemCounts.ContainsKey(item))
@@ -45,6 +50,8 @@ namespace Assets.Scripts.Player
         {
             return itemCounts.ContainsKey(item) && itemCounts[item] >= count;
         }
+
+
     }
 
 }

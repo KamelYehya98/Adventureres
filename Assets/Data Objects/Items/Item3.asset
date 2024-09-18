@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a60dc2948053ce4ca5d1b0fa91f9a99, type: 3}
   m_Name: Item3
   m_EditorClassIdentifier: 
+  Id: 8c533a53-1ca1-4412-ad18-fa6af86bdb84
   type: 0
   actionType: 3
   range: {x: 5, y: 4}
