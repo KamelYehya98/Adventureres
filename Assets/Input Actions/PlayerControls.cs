@@ -21,310 +21,310 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public @PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
-            ""name"": ""PlayerControls"",
-            ""maps"": [
+    ""name"": ""PlayerControls"",
+    ""maps"": [
+        {
+            ""name"": ""Player"",
+            ""id"": ""bdf84b9c-f0a6-4bcc-9b82-5c2f0bb42504"",
+            ""actions"": [
                 {
-                    ""name"": ""Player"",
-                    ""id"": ""bdf84b9c-f0a6-4bcc-9b82-5c2f0bb42504"",
-                    ""actions"": [
-                        {
-                            ""name"": ""Move"",
-                            ""type"": ""PassThrough"",
-                            ""id"": ""82c6eeb8-ea01-4362-afdf-61af70881a1b"",
-                            ""expectedControlType"": ""Vector2"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        },
-                        {
-                            ""name"": ""Dodge"",
-                            ""type"": ""Button"",
-                            ""id"": ""1238c331-9b3a-487d-9c24-ac24e40c9e9a"",
-                            ""expectedControlType"": ""Button"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        },
-                        {
-                            ""name"": ""Attack"",
-                            ""type"": ""Button"",
-                            ""id"": ""b04ae858-e039-49cd-8eb6-766e2bd09112"",
-                            ""expectedControlType"": ""Button"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        },
-                        {
-                            ""name"": ""SpecialAbility"",
-                            ""type"": ""Button"",
-                            ""id"": ""b5515977-e4d5-47d8-9769-166af4b67677"",
-                            ""expectedControlType"": ""Button"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        },
-                        {
-                            ""name"": ""SwitchClassRight"",
-                            ""type"": ""Button"",
-                            ""id"": ""683c0fb2-1fb9-4f94-8bc9-587507525046"",
-                            ""expectedControlType"": ""Button"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        },
-                        {
-                            ""name"": ""SwitchClassLeft"",
-                            ""type"": ""Button"",
-                            ""id"": ""ce58f3b0-ed01-4629-aa2b-1a1afbea934f"",
-                            ""expectedControlType"": ""Button"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        }
-                    ],
-                    ""bindings"": [
-                        {
-                            ""name"": ""2D Vector"",
-                            ""id"": ""e24278c2-7c3d-498e-8ac1-e4168480f0b9"",
-                            ""path"": ""2DVector"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Move"",
-                            ""isComposite"": true,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": ""up"",
-                            ""id"": ""1386b612-28d9-4b40-9c3c-014d930a56a1"",
-                            ""path"": ""<Keyboard>/w"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player2ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": ""down"",
-                            ""id"": ""0b97b609-6555-4753-a27d-99513f54188d"",
-                            ""path"": ""<Keyboard>/s"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player2ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": ""left"",
-                            ""id"": ""4f2762e8-574c-41d1-bfda-f81b87c34cce"",
-                            ""path"": ""<Keyboard>/a"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player2ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": ""right"",
-                            ""id"": ""eb845ce5-eab0-4d8d-ae6f-f75ab61eaf97"",
-                            ""path"": ""<Keyboard>/d"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player2ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""d16feaaf-925a-4a07-835a-7c43ad42d8d5"",
-                            ""path"": ""<Gamepad>/leftStick"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": ""2D Vector"",
-                            ""id"": ""3af221c7-9d7d-4d5c-a31c-4803575edafb"",
-                            ""path"": ""2DVector"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Move"",
-                            ""isComposite"": true,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": ""up"",
-                            ""id"": ""d329a7d3-e8c4-471f-b391-6e2cc53f34e5"",
-                            ""path"": ""<Keyboard>/upArrow"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player1ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": ""down"",
-                            ""id"": ""a8e8c7a4-7672-4dfd-af9e-73de86a4b7d2"",
-                            ""path"": ""<Keyboard>/downArrow"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player1ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": ""left"",
-                            ""id"": ""0075cb44-1c97-411a-998f-5201ceb41747"",
-                            ""path"": ""<Keyboard>/leftArrow"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player1ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": ""right"",
-                            ""id"": ""83e76231-bcfd-445e-bed9-7fd83ec4a8fd"",
-                            ""path"": ""<Keyboard>/rightArrow"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": ""Player1ControlScheme"",
-                            ""action"": ""Move"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": true
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""aba1e1ef-4cf3-418a-ade9-406338a2dd11"",
-                            ""path"": ""<Keyboard>/space"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Dodge"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""6fa211ca-6a26-493f-b0af-198f1f6b3939"",
-                            ""path"": ""<Gamepad>/buttonSouth"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Dodge"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""263046cb-d52b-4400-8417-95ad6489352e"",
-                            ""path"": ""<Keyboard>/f"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Attack"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""b5e970e4-ce6e-4101-abde-8ab589d5f227"",
-                            ""path"": ""<Gamepad>/buttonWest"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""Attack"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""03760e53-505b-46a5-8565-0ac215e383a7"",
-                            ""path"": ""<Keyboard>/m"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""SpecialAbility"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""07c262ec-0413-4334-b8c5-c5254a75668a"",
-                            ""path"": ""<Keyboard>/e"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""SwitchClassRight"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        },
-                        {
-                            ""name"": """",
-                            ""id"": ""ac3ffc28-95a1-4670-83cd-6a5f54db3a13"",
-                            ""path"": ""<Keyboard>/q"",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""SwitchClassLeft"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        }
-                    ]
+                    ""name"": ""Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""82c6eeb8-ea01-4362-afdf-61af70881a1b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UI"",
-                    ""id"": ""cbc3e464-c3fe-4e68-a1e1-de02ece7a5ce"",
-                    ""actions"": [
-                        {
-                            ""name"": ""New action"",
-                            ""type"": ""Button"",
-                            ""id"": ""c59a5ba2-f099-466e-891c-99abd49a7a05"",
-                            ""expectedControlType"": ""Button"",
-                            ""processors"": """",
-                            ""interactions"": """",
-                            ""initialStateCheck"": false
-                        }
-                    ],
-                    ""bindings"": [
-                        {
-                            ""name"": """",
-                            ""id"": ""844bccd1-89ef-4601-9f32-1549523fc70e"",
-                            ""path"": """",
-                            ""interactions"": """",
-                            ""processors"": """",
-                            ""groups"": """",
-                            ""action"": ""New action"",
-                            ""isComposite"": false,
-                            ""isPartOfComposite"": false
-                        }
-                    ]
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""1238c331-9b3a-487d-9c24-ac24e40c9e9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""b04ae858-e039-49cd-8eb6-766e2bd09112"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5515977-e4d5-47d8-9769-166af4b67677"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchClassRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""683c0fb2-1fb9-4f94-8bc9-587507525046"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchClassLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce58f3b0-ed01-4629-aa2b-1a1afbea934f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
-            ""controlSchemes"": [
+            ""bindings"": [
                 {
-                    ""name"": ""Player1ControlScheme"",
-                    ""bindingGroup"": ""Player1ControlScheme"",
-                    ""devices"": []
+                    ""name"": ""2D Vector"",
+                    ""id"": ""e24278c2-7c3d-498e-8ac1-e4168480f0b9"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Player2ControlScheme"",
-                    ""bindingGroup"": ""Player2ControlScheme"",
-                    ""devices"": []
+                    ""name"": ""up"",
+                    ""id"": ""1386b612-28d9-4b40-9c3c-014d930a56a1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player2ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0b97b609-6555-4753-a27d-99513f54188d"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player2ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""4f2762e8-574c-41d1-bfda-f81b87c34cce"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player2ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""eb845ce5-eab0-4d8d-ae6f-f75ab61eaf97"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player2ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d16feaaf-925a-4a07-835a-7c43ad42d8d5"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""3af221c7-9d7d-4d5c-a31c-4803575edafb"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d329a7d3-e8c4-471f-b391-6e2cc53f34e5"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player1ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a8e8c7a4-7672-4dfd-af9e-73de86a4b7d2"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player1ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""0075cb44-1c97-411a-998f-5201ceb41747"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player1ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""83e76231-bcfd-445e-bed9-7fd83ec4a8fd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player1ControlScheme"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aba1e1ef-4cf3-418a-ade9-406338a2dd11"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6fa211ca-6a26-493f-b0af-198f1f6b3939"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5e970e4-ce6e-4101-abde-8ab589d5f227"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbe7c9d7-9bf8-40e7-a1cc-f3e05b44b1a7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player2ControlScheme;Player1ControlScheme"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03760e53-505b-46a5-8565-0ac215e383a7"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07c262ec-0413-4334-b8c5-c5254a75668a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchClassRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac3ffc28-95a1-4670-83cd-6a5f54db3a13"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchClassLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
-        }");
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""cbc3e464-c3fe-4e68-a1e1-de02ece7a5ce"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""c59a5ba2-f099-466e-891c-99abd49a7a05"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""844bccd1-89ef-4601-9f32-1549523fc70e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
+    ""controlSchemes"": [
+        {
+            ""name"": ""Player1ControlScheme"",
+            ""bindingGroup"": ""Player1ControlScheme"",
+            ""devices"": []
+        },
+        {
+            ""name"": ""Player2ControlScheme"",
+            ""bindingGroup"": ""Player2ControlScheme"",
+            ""devices"": []
+        }
+    ]
+}");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);

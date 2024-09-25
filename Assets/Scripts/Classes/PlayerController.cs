@@ -20,12 +20,12 @@ namespace Assets.Scripts.Classes
 
         public void Start()
         {
-            animationManager = new AnimationManager();
+            //animationManager = new AnimationManager();
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rb = GetComponent<Rigidbody2D>();
 
-            animationManager.SetAnimator(GetComponent<Animator>());
+           // animationManager.SetAnimator(GetComponent<Animator>());
 
             DontDestroyOnLoad(gameObject);
         }
@@ -47,7 +47,7 @@ namespace Assets.Scripts.Classes
                 return;
             }
 
-            animationManager.ManageAnimations(_spriteRenderer, movement);
+           // animationManager.ManageAnimations(_spriteRenderer, movement);
         }
 
         public void TakeDamage(float damage) { }
@@ -56,12 +56,12 @@ namespace Assets.Scripts.Classes
 
     public static class GenericAnimationStates
     {
-        public const string IdleUp = "wolf_idle_up";
-        public const string IdleDown = "wolf_idle_down";
-        public const string IdleRight = "wolf_idle_right";
-        public const string WalkUp = "wolf_walk_up";
-        public const string WalkDown = "wolf_walk_down";
-        public const string WalkRight = "wolf_walk_right";
+        public const string IdleUp = "Idle";
+        public const string IdleDown = "Idle";
+        public const string IdleRight = "Idle";
+        public const string WalkUp = "Running";
+        public const string WalkDown = "Running";
+        public const string WalkRight = "Running";
     }
 }
 

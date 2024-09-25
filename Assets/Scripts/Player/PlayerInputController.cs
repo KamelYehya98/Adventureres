@@ -8,7 +8,8 @@ public class PlayerInputController : MonoBehaviour
 
     private PlayerController _playerClass;
     private Vector2 moveInput;
-
+    public float attackInput;
+    
     [SerializeField]
     private string controlScheme;
 
@@ -23,6 +24,10 @@ public class PlayerInputController : MonoBehaviour
 
             inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
             inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
+            inputActions.Player.Attack.performed += ctx => attackInput = ctx.ReadValue<float>();
+            inputActions.Player.Attack.canceled += ctx => attackInput = 0;
+
             inputActions.Player.Enable();
         }
     }
@@ -51,6 +56,10 @@ public class PlayerInputController : MonoBehaviour
     {
         inputActions.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
+
+        inputActions.Player.Attack.performed -= ctx => attackInput = ctx.ReadValue<byte>();
+        inputActions.Player.Attack.canceled -= ctx => attackInput = 0;
+
         inputActions.Player.Disable();
     }
 }

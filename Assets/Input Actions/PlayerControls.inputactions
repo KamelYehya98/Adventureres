@@ -206,8 +206,8 @@
                 },
                 {
                     "name": "",
-                    "id": "263046cb-d52b-4400-8417-95ad6489352e",
-                    "path": "<Keyboard>/f",
+                    "id": "b5e970e4-ce6e-4101-abde-8ab589d5f227",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -217,11 +217,11 @@
                 },
                 {
                     "name": "",
-                    "id": "b5e970e4-ce6e-4101-abde-8ab589d5f227",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "dbe7c9d7-9bf8-40e7-a1cc-f3e05b44b1a7",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Player2ControlScheme;Player1ControlScheme",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false

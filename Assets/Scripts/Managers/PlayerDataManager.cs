@@ -59,7 +59,7 @@ namespace Assets.Scripts.Managers
         {
             playerControlScheme = new PlayerControlScheme()
             {
-                Name = "Player1ControlScheme",
+                Name = "Player2ControlScheme",
                 IsAvailable = true,
                 IsMain = true,
             };
