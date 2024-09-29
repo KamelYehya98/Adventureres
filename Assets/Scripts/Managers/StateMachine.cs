@@ -64,27 +64,22 @@ namespace Assets.Scripts.Managers
         {
             mainStateType = new IdleCombatState();
 
-
             UnityEditor.EditorApplication.delayCall += () =>
             {
                 if (mainStateType == null)
                 {
                     if (customName == "Combat")
                     {
-                        Debug.Log("asdlfjkasldkfjlasdfjlaskdjfasdkjfaskldfjas;dfjasdfjsaldfjsaldkjfsakdjfsa;ldkjfsa;dlkfjasldkfjasdlkfj;sadkf");
                         mainStateType = new IdleCombatState();
                     }
                 }
             };
 
             SetNextStateToMain();
-
-
         }
 
         private void OnValidate()
         {
-
         }
     }
 }

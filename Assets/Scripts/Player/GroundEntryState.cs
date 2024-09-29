@@ -12,7 +12,7 @@ namespace Assets.Scripts.Player
             // Attack
             attackIndex = 1;
             duration = 0.429f; // First attack duration
-            animator.SetTrigger("Attack" + attackIndex);
+            animationManager.StartAttackAnimation("Attack " + attackIndex);
             Debug.Log("Player Attack " + attackIndex + " Fired!");
         }
 
@@ -20,7 +20,7 @@ namespace Assets.Scripts.Player
         {
             base.OnUpdate();
 
-            if (animator.GetFloat("AttackWindow.Open") > 0f && inputController.attackInput == 1)
+            if (animationManager.animator.GetFloat("AttackWindow.Open") > 0f && inputController.attackInput > 0)
             {
                 shouldCombo = true;  // Allow combo if the attack input was pressed in the attack window
                 AttackPressedTimer = 0;  // Reset the input buffer
@@ -35,9 +35,16 @@ namespace Assets.Scripts.Player
                 }
                 else
                 {
-                    stateMachine.SetNextStateToMain(); // Return to main state
+                    stateMachine.SetNextState(new IdleCombatState()); // Return to main state
                 }
             }
+        }
+
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            animationManager.animator.SetBool("IsAttacking", false);
         }
 
     }

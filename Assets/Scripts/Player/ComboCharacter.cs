@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Managers;
 using UnityEngine;
-using UnityEngine.InputSystem.XInput;
 
 namespace Assets.Scripts.Player
 {
@@ -26,7 +25,7 @@ namespace Assets.Scripts.Player
             {
                 if (meleeStateMachine.CurrentState != null)
                 {
-                    if (playerControls.attackInput == 1 && meleeStateMachine.CurrentState.GetType() == typeof(IdleCombatState))
+                    if (playerControls.attackInput > 0 && meleeStateMachine.CurrentState.GetType() == typeof(IdleCombatState))
                     {
                         meleeStateMachine.SetNextState(new GroundEntryState());
                     }

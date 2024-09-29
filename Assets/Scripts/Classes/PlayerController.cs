@@ -18,37 +18,40 @@ namespace Assets.Scripts.Classes
             this.playerData = playerData;
         }
 
-        public void Start()
+        public void Awake()
         {
-            //animationManager = new AnimationManager();
+            animationManager = GetComponent<AnimationManager>();
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rb = GetComponent<Rigidbody2D>();
-
-           // animationManager.SetAnimator(GetComponent<Animator>());
 
             DontDestroyOnLoad(gameObject);
         }
 
         public void Move(Vector2 direction)
         {
-            if(transform != null && direction != null && playerData.Skills != null)
+            if(animationManager.IsAttackState())
             {
-                transform.position += playerData.Skills.Agility * Time.deltaTime * (Vector3)direction;
-                AdjustPlayerFacingDirection(direction);
+                _rb.velocity = Vector2.zero;
+            }
+            else if(direction != null && playerData.Skills != null)
+            {
+                _rb.velocity = direction.normalized * playerData.Skills.Agility;
+                
+               // AdjustPlayerFacingDirection();
             }
         }
 
-        private void AdjustPlayerFacingDirection(Vector2 movement)
-        {
-            if (_spriteRenderer == null)
-            {
-                Debug.LogError("_spriteRenderer is null.");
-                return;
-            }
+        //private void AdjustPlayerFacingDirection()
+        //{
+        //    if (_spriteRenderer == null)
+        //    {
+        //        Debug.LogError("_spriteRenderer is null.");
+        //        return;
+        //    }
 
-           // animationManager.ManageAnimations(_spriteRenderer, movement);
-        }
+        //    animationManager.RunningAnimation();
+        //}
 
         public void TakeDamage(float damage) { }
     }

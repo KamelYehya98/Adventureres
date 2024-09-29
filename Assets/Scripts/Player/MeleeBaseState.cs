@@ -9,7 +9,7 @@ namespace Assets.Scripts.Player
         // How long this state should be active for before moving on
         public float duration;
         // Cached animator component
-        protected Animator animator;
+        protected AnimationManager animationManager;
         // bool to check whether or not the next attack in the sequence should be played or not
         protected bool shouldCombo;
         // The attack index in the sequence of attacks
@@ -30,7 +30,7 @@ namespace Assets.Scripts.Player
         public override void OnEnter(StateMachine _stateMachine)
         {
             base.OnEnter(_stateMachine);
-            animator = GetComponent<Animator>();
+            animationManager = GetComponent<AnimationManager>();
             collidersDamaged = new List<Collider2D>();
             hitCollider = GetComponent<ComboCharacter>().hitbox;
             HitEffectPrefab = GetComponent<ComboCharacter>().Hiteffect;
@@ -47,23 +47,22 @@ namespace Assets.Scripts.Player
             AttackPressedTimer -= Time.deltaTime;
 
             // Attack if the weapon is active
-            if (animator.GetFloat("Weapon.Active") > 0f)
+            if (animationManager.animator.GetFloat("Weapon.Active") > 0f)
             {
                 Attack();
             }
 
             // Check if the attack input is pressed
-            if (inputController.attackInput == 1)
+            if (inputController.attackInput > 0)
             {
-                AttackPressedTimer = 2;  // Reset buffer timer when attack input is detected
+                AttackPressedTimer = 1.5f;  // Reset buffer timer when attack input is detected
             }
         }
-
-
 
         public override void OnExit()
         {
             base.OnExit();
+            animationManager.animator.SetBool("IsAttacking", false);
         }
 
         protected void Attack()

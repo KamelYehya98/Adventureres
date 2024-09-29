@@ -4,15 +4,29 @@ using UnityEngine;
 
 namespace Assets.Scripts.Managers
 {
-    public class AnimationManager
+    public class AnimationManager : MonoBehaviour
     {
         public Animator animator;
+        public SpriteRenderer spriteRenderer;
+        public Rigidbody2D rb;
+
         private string _currentState;
 
         // Animation Control
         public bool facingHorizontal;
         public bool facingUp;
         public bool facingDown;
+
+        public void Awake()
+        {
+            animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>();
+
+            facingHorizontal = true;
+            facingUp = false;
+            facingDown = false;
+        }
 
         public void ChangeAnimatorState(string newState)
         {
@@ -29,41 +43,50 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        public void SetAnimator(Animator animator)
+        public bool IsAttackState()
         {
-            this.animator = animator;
+            return animator.GetBool("IsAttacking");
         }
 
-        public void ManageAnimations(SpriteRenderer spriteRenderer, Vector2 movement)
+        public void StartAttackAnimation(string attackName)
         {
-            bool isMoving = movement != Vector2.zero;
+            animator.SetBool("IsAttacking", true);
+            ChangeAnimatorState(attackName);
+        }
 
-            if (Math.Abs(movement.x) > Math.Abs(movement.y))
+        public void MovementAnimation()
+        {
+            bool isMoving = rb.velocity != Vector2.zero;
+
+            if (isMoving)
             {
-                facingHorizontal = true;
-                facingDown = false;
-                facingUp = false;
-            }
-            else if (Math.Abs(movement.x) < Math.Abs(movement.y))
-            {
-                facingHorizontal = false;
-                if (movement.y > 0)
+                if (Math.Abs(rb.velocity.x) > Math.Abs(rb.velocity.y))
                 {
-                    facingUp = true;
+                    facingHorizontal = true;
                     facingDown = false;
-                }
-                else
-                {
-                    facingDown = true;
                     facingUp = false;
                 }
+                else if (Math.Abs(rb.velocity.x) < Math.Abs(rb.velocity.y))
+                {
+                    facingHorizontal = false;
+                    if (rb.velocity.y > 0)
+                    {
+                        facingUp = true;
+                        facingDown = false;
+                    }
+                    else
+                    {
+                        facingDown = true;
+                        facingUp = false;
+                    }
+                }
             }
 
-            if (movement.x > 0)
+            if (rb.velocity.x > 0)
             {
                 spriteRenderer.flipX = false;
             }
-            else if (movement.x < 0)
+            else if (rb.velocity.x < 0)
             {
                 spriteRenderer.flipX = true;
             }

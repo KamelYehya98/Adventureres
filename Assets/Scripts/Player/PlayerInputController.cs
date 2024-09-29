@@ -9,7 +9,9 @@ public class PlayerInputController : MonoBehaviour
     private PlayerController _playerClass;
     private Vector2 moveInput;
     public float attackInput;
-    
+
+    private Animator _animator;
+
     [SerializeField]
     private string controlScheme;
 
@@ -34,14 +36,16 @@ public class PlayerInputController : MonoBehaviour
 
     private void Awake()
     {
+        _playerClass = GetComponent<PlayerController>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        _playerClass = GetComponent<PlayerController>();
+
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(_playerClass == null)
         {

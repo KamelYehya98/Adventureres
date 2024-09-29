@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 4723457902798620238}
   - component: {fileID: 7463161197972915023}
   - component: {fileID: 6201996493329377317}
-  - component: {fileID: -3382792917877859825}
   - component: {fileID: 7501674218606206720}
   - component: {fileID: 5590731709935780716}
   - component: {fileID: -8060424504003192524}
+  - component: {fileID: 8841753194455628112}
+  - component: {fileID: 238712093377491204}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -89,7 +90,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -173,8 +174,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemManager: {fileID: 0}
   items: []
---- !u!58 &-3382792917877859825
-CircleCollider2D:
+--- !u!114 &7501674218606206720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956844346490765429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8bbe3640c7aeb4da31d2bff1bbc4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData:
+    PlayerName: 
+    Level: 0
+    Experience: 0
+    Mana: 0
+    Skills:
+      Vitality: 100
+      Regeneration: 15
+      AttackPower: 15
+      CriticalStrike: 0.05
+      Defense: 10
+      Agility: 6
+    Inventory:
+      _keys: []
+      _values: 
+  _rb: {fileID: 979239237353109136}
+  _spriteRenderer: {fileID: 4723457902798620238}
+  animationManager: {fileID: 238712093377491204}
+--- !u!114 &5590731709935780716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956844346490765429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e14cc5c655801e479f8575cd3b0de03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 4437256240602726678}
+  Hiteffect: {fileID: 1518655715659774, guid: 7d91db3260583a04884fd1d5b635bb70, type: 3}
+--- !u!114 &-8060424504003192524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956844346490765429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8383dcd68addcb459640a0a13b97eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customName: Combat
+--- !u!70 &8841753194455628112
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -205,10 +263,10 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016626835, y: 0.6269686}
-  serializedVersion: 2
-  m_Radius: 0.5254426
---- !u!114 &7501674218606206720
+  m_Offset: {x: 0.015509784, y: 1.315512}
+  m_Size: {x: 0.94586885, y: 2.0935483}
+  m_Direction: 0
+--- !u!114 &238712093377491204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,53 +275,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7956844346490765429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e8bbe3640c7aeb4da31d2bff1bbc4b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 843b945cb9bb890459979327fc93118b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    PlayerName: 
-    Level: 0
-    Experience: 0
-    Mana: 0
-    Skills:
-      Vitality: 100
-      Regeneration: 15
-      AttackPower: 15
-      CriticalStrike: 0.05
-      Defense: 10
-      Agility: 6
-    Inventory:
-      _keys: []
-      _values: 
-  _rb: {fileID: 0}
-  _spriteRenderer: {fileID: 0}
---- !u!114 &5590731709935780716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956844346490765429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e14cc5c655801e479f8575cd3b0de03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitbox: {fileID: 4437256240602726678}
-  Hiteffect: {fileID: 1518655715659774, guid: 7d91db3260583a04884fd1d5b635bb70, type: 3}
---- !u!114 &-8060424504003192524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7956844346490765429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8383dcd68addcb459640a0a13b97eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customName: Combat
+  animator: {fileID: 3324403008969344016}
+  spriteRenderer: {fileID: 4723457902798620238}
+  rb: {fileID: 979239237353109136}
+  facingHorizontal: 0
+  facingUp: 0
+  facingDown: 0
 --- !u!1001 &1077732286064724717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -457,6 +477,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4305605696830881326}
     m_Modifications:
+    - target: {fileID: 953604328050132432, guid: 026116af9b11a1d4da48708ee020d897, type: 3}
+      propertyPath: m_Size.x
+      value: 5.442731
+      objectReference: {fileID: 0}
+    - target: {fileID: 953604328050132432, guid: 026116af9b11a1d4da48708ee020d897, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.24601364
+      objectReference: {fileID: 0}
     - target: {fileID: 6192874611312670525, guid: 026116af9b11a1d4da48708ee020d897, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

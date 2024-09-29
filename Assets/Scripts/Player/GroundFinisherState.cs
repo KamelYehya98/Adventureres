@@ -12,7 +12,8 @@ namespace Assets.Scripts.Player
             //Attack
             attackIndex = 3;
             duration = 0.5f;
-            animator.SetTrigger("Attack" + attackIndex);
+            animationManager.StartAttackAnimation("Attack " + attackIndex);
+
             Debug.Log("Player Attack " + attackIndex + " Fired!");
         }
 
@@ -24,6 +25,11 @@ namespace Assets.Scripts.Player
             {
                 stateMachine.SetNextStateToMain();
             }
+        }
+        public override void OnExit()
+        {
+            base.OnExit();
+            animationManager.animator.SetBool("IsAttacking", false);
         }
     }
 }
