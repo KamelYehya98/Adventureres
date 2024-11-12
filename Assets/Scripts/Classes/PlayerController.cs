@@ -1,5 +1,6 @@
 using Assets.Scripts.Data;
 using Assets.Scripts.Managers;
+using Assets.Scripts.Player;
 using UnityEngine;
 
 namespace Assets.Scripts.Classes
@@ -12,6 +13,7 @@ namespace Assets.Scripts.Classes
         public SpriteRenderer _spriteRenderer;
 
         public AnimationManager animationManager;
+        public WeaponComponent weaponComponent;
 
         public void Initialize(PlayerData playerData)
         {
@@ -21,6 +23,7 @@ namespace Assets.Scripts.Classes
         public void Awake()
         {
             animationManager = GetComponent<AnimationManager>();
+            weaponComponent = GetComponentInChildren<WeaponComponent>();
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rb = GetComponent<Rigidbody2D>();
@@ -37,21 +40,8 @@ namespace Assets.Scripts.Classes
             else if(direction != null && playerData.Skills != null)
             {
                 _rb.velocity = direction.normalized * playerData.Skills.Agility;
-                
-               // AdjustPlayerFacingDirection();
             }
         }
-
-        //private void AdjustPlayerFacingDirection()
-        //{
-        //    if (_spriteRenderer == null)
-        //    {
-        //        Debug.LogError("_spriteRenderer is null.");
-        //        return;
-        //    }
-
-        //    animationManager.RunningAnimation();
-        //}
 
         public void TakeDamage(float damage) { }
     }
@@ -65,6 +55,9 @@ namespace Assets.Scripts.Classes
         public const string WalkUp = "Running";
         public const string WalkDown = "Running";
         public const string WalkRight = "Running";
+        public const string Attack1 = "Attack1";
+        public const string Attack2 = "Attack2";
+        public const string Attack3 = "Attack3";
     }
 }
 

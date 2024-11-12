@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a60dc2948053ce4ca5d1b0fa91f9a99, type: 3}
+  m_Name: Sword1
+  m_EditorClassIdentifier: 
+  Id: a20c6487-a21b-412d-a9c8-4155c6be6a9d
+  type: 3
+  actionType: 1
+  range: {x: 5, y: 4}
+  stackable: 1
+  image: {fileID: 863324928, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+  comboAnimations:
+  - animations:
+    - {fileID: 979966900, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 1245599098, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 1444547868, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: -201385642, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 244551360, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+  - animations:
+    - {fileID: 1868100278, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: -411090104, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: -1028866269, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: -829210158, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 1908367074, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+  - animations:
+    - {fileID: 1935764827, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 1527803226, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 1381524867, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 632774742, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}
+    - {fileID: 863324928, guid: f12265f5b12138841ba33a6d35d964a5, type: 3}

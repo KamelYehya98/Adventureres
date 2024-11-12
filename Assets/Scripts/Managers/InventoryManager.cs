@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Data;
+﻿using Assets.Scripts.Classes;
+using Assets.Scripts.Data;
+using Assets.Scripts.Player;
 using Assets.Scripts.Scriptable_Objects;
 using Assets.Scripts.UI.Inventory;
 using UnityEngine;
@@ -13,8 +15,16 @@ namespace Assets.Scripts.Managers
         private int _maxStackCount = 4;
         public InventorySlot[] inventorySlots;
         public GameObject inventoryItemPrefab;
+        public CharacterStateManager stateManager;
+        private PlayerController PlayerController;
 
         int selectedSlot = -1;
+
+        private void Awake()
+        {
+            PlayerController = GetComponent<PlayerController>();
+            stateManager = GetComponent<CharacterStateManager>();
+        }
 
         public void ChangeSelectedSlot(int newValue)
         {
@@ -25,6 +35,22 @@ namespace Assets.Scripts.Managers
 
             inventorySlots[newValue].Select();
             selectedSlot = newValue;
+
+            InventoryItem itemInSlot = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item != null)
+            {
+                Debug.Log("Item in slot type: " + itemInSlot.item.type.ToString());
+
+                if (itemInSlot.item.type == ItemType.Sword)
+                {
+                    Debug.Log("Equiped item is sword");
+
+                    PlayerController.weaponComponent.SetWeapon(itemInSlot.item);
+                    stateManager.meleeStateMachine.SetNextStateToMain();
+                }
+            }
+
+
         }
 
         private void Update()
@@ -84,6 +110,7 @@ namespace Assets.Scripts.Managers
             if(itemInSlot != null)
             {
                 ItemData item = itemInSlot.item;
+
                 if(use)
                 {
                     itemInSlot.count--;
@@ -100,6 +127,13 @@ namespace Assets.Scripts.Managers
             }
 
             return null;
+        }
+
+        public ItemType GetCurrentItemType()
+        {
+            return selectedSlot == -1 || inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>() is null
+                ? ItemType.None
+                : inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().item.type;
         }
 
         public void LoadData(GameData gameData)

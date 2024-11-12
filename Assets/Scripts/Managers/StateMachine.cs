@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Player;
+using Assets.Scripts.Player.States;
 using UnityEngine;
 
 namespace Assets.Scripts.Managers
@@ -12,7 +13,6 @@ namespace Assets.Scripts.Managers
         public State CurrentState { get; private set; }
         private State nextState;
 
-        // Update is called once per frame
         void Update()
         {
             if (nextState != null)
@@ -68,7 +68,7 @@ namespace Assets.Scripts.Managers
             {
                 if (mainStateType == null)
                 {
-                    if (customName == "Combat")
+                    if (customName == "Player")
                     {
                         mainStateType = new IdleCombatState();
                     }
@@ -76,10 +76,6 @@ namespace Assets.Scripts.Managers
             };
 
             SetNextStateToMain();
-        }
-
-        private void OnValidate()
-        {
         }
     }
 }

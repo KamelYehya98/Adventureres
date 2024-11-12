@@ -7,7 +7,7 @@ public class PlayerInputController : MonoBehaviour
     public PlayerControls inputActions;
 
     private PlayerController _playerClass;
-    private Vector2 moveInput;
+    public Vector2 moveInput;
     public float attackInput;
 
     private Animator _animator;

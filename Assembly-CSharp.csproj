@@ -68,6 +68,9 @@
     <Compile Include="Assets\Scripts\Constants\GameConstants.cs" />
     <Compile Include="Assets\Scripts\Data\GlobalGameData.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerDataConverter.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyAnimationManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies\GreenSlime\GreenSlime.cs" />
+    <Compile Include="Assets\Scripts\Enemies\GreenSlime\GreenSlimeData.cs" />
     <Compile Include="Assets\Scripts\Enemies\MeleeEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Projectile.cs" />
     <Compile Include="Assets\Scripts\Enemies\RangedEnemy.cs" />
@@ -84,19 +87,24 @@
     <Compile Include="Assets\Scripts\Data\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Managers\State.cs" />
     <Compile Include="Assets\Scripts\Managers\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\Player\ComboCharacter.cs" />
+    <Compile Include="Assets\Scripts\Player\CharacterStateManager.cs" />
     <Compile Include="Assets\Scripts\Player\CraftingSystem.cs" />
-    <Compile Include="Assets\Scripts\Player\GroundComboState.cs" />
-    <Compile Include="Assets\Scripts\Player\GroundEntryState.cs" />
-    <Compile Include="Assets\Scripts\Player\GroundFinisherState.cs" />
-    <Compile Include="Assets\Scripts\Player\IdleCombatState.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerSpells.cs" />
+    <Compile Include="Assets\Scripts\Player\States\MagicAttack1_1.cs" />
+    <Compile Include="Assets\Scripts\Player\States\MagicEntryState.cs" />
+    <Compile Include="Assets\Scripts\Player\States\MeleeAttack1_2.cs" />
+    <Compile Include="Assets\Scripts\Player\States\MeleeAttack1_1.cs" />
+    <Compile Include="Assets\Scripts\Player\States\MeleeAttack1_3.cs" />
+    <Compile Include="Assets\Scripts\Player\States\IdleCombatState.cs" />
     <Compile Include="Assets\Scripts\Player\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Player\MeleeBaseState.cs" />
-    <Compile Include="Assets\Scripts\Player\MeleeEntryState.cs" />
-    <Compile Include="Assets\Scripts\Player\RunningState.cs" />
+    <Compile Include="Assets\Scripts\Player\States\AttackBaseState.cs" />
+    <Compile Include="Assets\Scripts\Player\States\MeleeEntryState.cs" />
+    <Compile Include="Assets\Scripts\Player\States\PlayerStateBase.cs" />
+    <Compile Include="Assets\Scripts\Player\States\RunningState.cs" />
     <Compile Include="Assets\Scripts\Player\TeamComponent.cs" />
+    <Compile Include="Assets\Scripts\Player\WeaponComponent.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\CraftingRecipeData.cs" />
-    <Compile Include="Assets\Scripts\Scriptable Objects\EnemyData.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\ItemData.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Abilities\FireballAbility.cs" />
@@ -1177,5 +1185,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Scripts\Spells\" />
   </ItemGroup>
 </Project>

@@ -20,19 +20,34 @@ namespace Assets.Scripts.Scriptable_Objects
         [Header("Both")]
         [JsonIgnore]
         public Sprite image;
+
+        [field: SerializeField] public ComboAnimations[] comboAnimations;
     }
 
     public enum ItemType
     {
+        None,
         Loot,
-        Tool
+        Tool,
+        Sword,
+        Staff,
+        Bow
     }
 
     public enum ActionType
     {
+        None,
         Attack,
+        Shoot,
+        Spell,
         Dig,
         Defend,
         Craftable
+    }
+
+    [Serializable]
+    public class ComboAnimations
+    {
+        [SerializeField] public Sprite[] animations;
     }
 }

@@ -7,16 +7,13 @@ namespace Assets.Scripts.Enemiies
     {
         protected override void Attack(PlayerController player)
         {
-            if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
-            {
-                enemyData.lastAttackTime = Time.time;
-                player.TakeDamage(enemyData.attackPower);
-                ////Debug.Log($"{enemyData.enemyName} attacks the player with melee attack.");
-            }
-            //else
-            //{
-            //    //Debug.Log("Melee not attacking");
-            //}
+            Debug.LogWarning("Melee Enemey Attacking State");
+
+            navMeshAgent.isStopped = true;
+
+            isAttacking = true;
+
+            enemyData.lastAttackTime = Time.time;
         }
     }
 

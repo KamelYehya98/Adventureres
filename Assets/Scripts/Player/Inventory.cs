@@ -50,8 +50,5 @@ namespace Assets.Scripts.Player
         {
             return itemCounts.ContainsKey(item) && itemCounts[item] >= count;
         }
-
-
     }
-
 }
