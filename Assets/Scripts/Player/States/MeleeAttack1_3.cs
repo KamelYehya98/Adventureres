@@ -11,9 +11,9 @@ namespace Assets.Scripts.Player.States
 
             //Attack
             attackIndex = 3;
-            duration = 0.714f;
+            duration = 0.417f;
             animationManager.StartAttackAnimation("Attack " + attackIndex);
-            weaponComponent.SetComboIndex(attackIndex - 1);
+            weaponController.SetComboIndex(attackIndex - 1);
 
             AttackPressedTimer = 0;  // Reset the input buffer
             inputController.attackInput = 0;

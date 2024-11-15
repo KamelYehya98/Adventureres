@@ -11,9 +11,9 @@ namespace Assets.Scripts.Player.States
 
             // Attack
             attackIndex = 1;
-            duration = 0.571f; // First attack duration
+            duration = 0.417f; // First attack duration
             animationManager.StartAttackAnimation("Attack " + attackIndex);
-            weaponComponent.SetComboIndex(attackIndex - 1);
+            weaponController.SetComboIndex(attackIndex - 1);
             
             Debug.Log("Player Attack " + attackIndex + " Fired!");
         }
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Player.States
         {
             base.OnUpdate();
 
-            if (animationManager.animator.GetFloat("AttackWindow.Open") > 0f && inputController.attackInput > 0)
+            if (animationManager.animator.GetFloat("AttackWindow.Open") > 0f && inputController.attackInput == 1)
             {
                 shouldCombo = true;  // Allow combo if the attack input was pressed in the attack window
                 AttackPressedTimer = 0;  // Reset the input buffer

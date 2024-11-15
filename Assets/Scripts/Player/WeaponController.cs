@@ -1,23 +1,29 @@
-﻿using Assets.Scripts.Scriptable_Objects;
+﻿using Assets.Scripts.Enemiies;
+using Assets.Scripts.Scriptable_Objects;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
-    public class WeaponComponent : MonoBehaviour
+    public class WeaponController : MonoBehaviour
     {
-        protected ItemData weaponData;
+        public ItemData weaponData;
 
         private SpriteRenderer weaponSpriteRenderer;
 
         [SerializeField]
         private SpriteRenderer baseSpriteRenderer;
 
-        private int currentComboIndex = 0;
-        private int currentAttackIndex = 0;
+        [SerializeField]
+        public PlayerCoreController playerCoreController;
 
+        private Collider2D weaponCollider;
+
+        public int currentComboIndex = 0;
+        public int currentAttackIndex = 0;
         private void Awake()
         {
             weaponSpriteRenderer = GetComponent<SpriteRenderer>();
+            weaponCollider = GetComponent<Collider2D>();
         }
 
         public void SetWeapon(ItemData weaponData)
@@ -31,14 +37,13 @@ namespace Assets.Scripts.Player
             }
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             weaponSpriteRenderer.flipX = baseSpriteRenderer.flipX;
         }
+
         public void OnPlayerSpriteChanged(Sprite playerSprite)
         {
-            Debug.Log("Entered sprite changer...........................................................");
-
             if (weaponData.comboAnimations.Length > 0)
             {
                 if (currentComboIndex < weaponData.comboAnimations.Length)
@@ -68,5 +73,29 @@ namespace Assets.Scripts.Player
             currentAttackIndex = 0;
             currentComboIndex = 0;
         }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            Debug.LogWarning("Entered collision with weapon");
+
+            if (other.gameObject.TryGetComponent(out TeamComponent teamComponent) && 
+                    other.gameObject.TryGetComponent(out Enemy enemy))
+            {
+                if (teamComponent != null && teamComponent.teamIndex == TeamIndex.Enemy && enemy != null && playerCoreController != null)
+                {
+                }
+            }
+        }
+
+        //private void OnCollisionExit2D(Collision2D collision)
+        //{
+        //    if (collision.gameObject.TryGetComponent(out TeamComponent teamComponent))
+        //    {
+        //        if (teamComponent != null && teamComponent.teamIndex == TeamIndex.Enemy)
+        //        {
+        //            rb.bodyType = RigidbodyType2D.Dynamic;
+        //        }
+        //    }
+        //}
     }
 }

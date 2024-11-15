@@ -11,6 +11,7 @@ namespace Assets.Scripts.Player.States
         {
             base.OnEnter(stateMachine);
             animationManager.animator.SetBool("IsAttacking", false);
+            playerController.OnAttackStopForceTrigger();
             Debug.Log("entered idle states");
         }
 

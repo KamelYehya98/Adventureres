@@ -23,7 +23,7 @@ namespace Assets.Scripts.Player.States
         // The Hit Effect to Spawn on the afflicted Enemy
         private GameObject HitEffectPrefab;
         private SpriteRenderer playerSpriteRenderer;
-        protected WeaponComponent weaponComponent;
+        protected WeaponController weaponController;
 
         // Input buffer Timer
         protected float AttackPressedTimer = 0;
@@ -32,25 +32,37 @@ namespace Assets.Scripts.Player.States
         {
             Sprite newSprite = spriteRenderer.sprite;
             // Notify the weapon component to update its animation
-            weaponComponent.OnPlayerSpriteChanged(newSprite);
+            weaponController.OnPlayerSpriteChanged(newSprite);
         }
 
         public override void OnEnter(StateMachine _stateMachine)
         {
             base.OnEnter(_stateMachine);
 
+            collidersDamaged = new List<Collider2D>();
+
             playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
             playerSpriteRenderer.RegisterSpriteChangeCallback(OnPlayerSpriteChanged);
 
-            weaponComponent = playerController.GetComponentInChildren<WeaponComponent>();
+            //hitCollider = playerController.GetComponentInChildren<Collider2D>();
 
-            collidersDamaged = new List<Collider2D>();
-            hitCollider = GetComponent<CharacterStateManager>().hitbox;
             HitEffectPrefab = GetComponent<CharacterStateManager>().Hiteffect;
+            weaponController = GetComponent<CharacterStateManager>().WeaponController;
+            hitCollider = GetComponent<CharacterStateManager>().hitbox;
 
             shouldCombo = false;
             AttackPressedTimer = 0;
+        }
+
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+
+            if (animationManager.animator.GetFloat("Weapon.Active") == 1f)
+            {
+                Attack();
+            }
         }
 
         public override void OnUpdate()
@@ -60,11 +72,12 @@ namespace Assets.Scripts.Player.States
             // Decrease the input buffer timer
             AttackPressedTimer -= Time.deltaTime;
 
-            // Attack if the weapon is active
-            if (animationManager.animator.GetFloat("Weapon.Active") == 1f)
+            if (animationManager.animator.GetFloat("Flip") == 1f && IsChangingDirection())
             {
-                Attack();
+                stateMachine.SetNextState(new IdleCombatState());
+                OnExit();
             }
+            // Attack if the weapon is active
 
             // Check if the attack input is pressed
             if (inputController.attackInput > 0)
@@ -73,22 +86,39 @@ namespace Assets.Scripts.Player.States
             }
         }
 
+        public bool IsChangingDirection()
+        {
+            if (
+                    inputController.moveInput != Vector2.zero && 
+                    (
+                        (animationManager.facingDown && inputController.moveInput.y > 0) ||
+                        (animationManager.facingUp && inputController.moveInput.y < 0) ||
+                        (animationManager.facingHorizontal && playerController.transform.localScale.x == -1 && inputController.moveInput.x > 0) ||
+                        (animationManager.facingHorizontal && playerController.transform.localScale.x == 1 && inputController.moveInput.x < 0)
+                    )
+               )
+            {
+                return true;
+            }
+
+            return false;
+        }
         public override void OnExit()
         {
             base.OnExit();
 
-            weaponComponent.ResetAttackIndex();
+            weaponController.ResetAttackIndex();
 
             playerSpriteRenderer.UnregisterSpriteChangeCallback(OnPlayerSpriteChanged);
-            
-            weaponComponent.GetComponent<SpriteRenderer>().sprite = null;
+
+            weaponController.GetComponent<SpriteRenderer>().sprite = null;
 
             animationManager.animator.SetBool("IsAttacking", false);
         }
 
         protected void Attack()
         {
-            Collider2D[] collidersToDamage = new Collider2D[10];
+            Collider2D[] collidersToDamage = new Collider2D[1000];
 
             ContactFilter2D filter = new()
             {
@@ -106,10 +136,11 @@ namespace Assets.Scripts.Player.States
                     // Only check colliders with a valid Team Componnent attached
                     if (hitTeamComponent && hitTeamComponent.teamIndex == TeamIndex.Enemy)
                     {
-                        Object.Instantiate(HitEffectPrefab, collidersToDamage[i].transform);
+                        //Object.Instantiate(HitEffectPrefab, collidersToDamage[i].transform);
 
                         if (collidersToDamage != null && collidersToDamage[i].GetComponentInParent<Enemy>() != null)
                         {
+                            collidersToDamage[i].GetComponentInParent<Enemy>().KnockBackEffect(playerController.GetFacingForce() * weaponController.weaponData.attackForceOnOthers[weaponController.currentComboIndex]);
                             collidersToDamage[i].GetComponentInParent<Enemy>().TakeDamage(10);
                         }
 

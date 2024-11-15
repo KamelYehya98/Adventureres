@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Classes;
-using Assets.Scripts.Enemiies;
+﻿using Assets.Scripts.Enemiies;
+using Assets.Scripts.Player;
 using System.Collections;
 using UnityEngine;
 
@@ -7,8 +7,8 @@ namespace Assets.Scripts.Enemies.GreenSlime
 {
     public class GreenSlime : MeleeEnemy
     {
-        public float chargeDuration = 1f;
-        public float jumpForce = 10f;
+        public float chargeDuration = 2f;
+        public float jumpForce = 1f;
 
         private bool isCharging = false;
         private Vector2 chargeDirection;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Enemies.GreenSlime
         {
             enemyData = new GreenSlimeData();
         }
-        protected override void Attack(PlayerController player)
+        protected override void Attack(PlayerCoreController player)
         {
             base.Attack(player);
 

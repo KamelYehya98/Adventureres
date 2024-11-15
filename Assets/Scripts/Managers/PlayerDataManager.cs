@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Classes;
-using Assets.Scripts.Data;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Player;
 using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
@@ -110,9 +110,9 @@ namespace Assets.Scripts.Managers
 
             GameObject player = Instantiate(playerPrefab, startPosition, Quaternion.identity);
 
-            player.GetComponent<PlayerController>().Initialize(gameData.PlayerData);
+            player.GetComponentInChildren<PlayerCoreController>().Initialize(gameData.PlayerData);
 
-            if (player.TryGetComponent(out PlayerInputController playerInputController))
+            if (player.GetComponentInChildren<PlayerInputController>() is PlayerInputController playerInputController)
             {
                 playerInputController.AssignControlScheme(playerControlScheme.Name);
             }
@@ -145,7 +145,7 @@ namespace Assets.Scripts.Managers
 
             cameraManager.AddPlayerCamera(vcam, mainCam);
 
-            Canvas canvas = player.GetComponentInChildren<Canvas>(true);
+            Canvas canvas = player.GetComponentInChildren<Canvas>();
 
             if (canvas == null)
             {

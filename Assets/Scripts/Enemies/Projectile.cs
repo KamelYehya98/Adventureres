@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Classes;
+﻿using Assets.Scripts.Player;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemiies
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Enemiies
         {
             //Debug.Log("Projectile collided with: " + other.gameObject.name);
 
-            if (other.TryGetComponent<PlayerController>(out var player))
+            if (other.TryGetComponent<PlayerCoreController>(out var player))
             {
                 //Debug.Log("Projectile collided with player");
                 player.TakeDamage(damage);

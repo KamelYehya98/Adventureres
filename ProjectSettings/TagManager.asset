@@ -13,9 +13,9 @@ TagManager:
   - Water
   - UI
   - Obstacles
-  - 
-  - 
-  - 
+  - Player
+  - Enemies
+  - Weapon
   - 
   - 
   - 
@@ -41,6 +41,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Weapon
+    uniqueID: 3655144103
+    locked: 0
+  - name: Player
+    uniqueID: 2390875187
     locked: 0
   - name: Background
     uniqueID: 3365181943

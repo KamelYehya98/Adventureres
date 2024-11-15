@@ -22,6 +22,8 @@ namespace Assets.Scripts.Scriptable_Objects
         public Sprite image;
 
         [field: SerializeField] public ComboAnimations[] comboAnimations;
+        [field: SerializeField] public float[] attackForceOnPlayer;
+        [field: SerializeField] public float[] attackForceOnOthers;
     }
 
     public enum ItemType

@@ -9,17 +9,19 @@ namespace Assets.Scripts.Player
         public StateMachine meleeStateMachine;
         private PlayerInputController playerControls;
 
-        [SerializeField] public Collider2D hitbox;
-        [SerializeField] public GameObject Hiteffect;
+        public Collider2D hitbox;
+        public GameObject Hiteffect;
+        public WeaponController WeaponController;
 
         // Start is called before the first frame update
-        void Awake()
+        public void Awake()
         {
             meleeStateMachine = GetComponent<StateMachine>();
             playerControls = GetComponent<PlayerInputController>();
+            WeaponController = GetComponentInChildren<WeaponController>();
         }
 
-        private void Start()
+        public void Start()
         {
             meleeStateMachine.SetNextState(new IdleCombatState());
         }

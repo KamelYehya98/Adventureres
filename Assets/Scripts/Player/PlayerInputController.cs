@@ -1,4 +1,4 @@
-using Assets.Scripts.Classes;
+using Assets.Scripts.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +6,7 @@ public class PlayerInputController : MonoBehaviour
 {
     public PlayerControls inputActions;
 
-    private PlayerController _playerClass;
+    private PlayerCoreController _playerClass;
     public Vector2 moveInput;
     public float attackInput;
 
@@ -36,7 +36,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void Awake()
     {
-        _playerClass = GetComponent<PlayerController>();
+        _playerClass = GetComponent<PlayerCoreController>();
         _animator = GetComponent<Animator>();
     }
 
@@ -49,7 +49,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if(_playerClass == null)
         {
-            _playerClass = GetComponent<PlayerController>();
+            _playerClass = GetComponent<PlayerCoreController>();
         }
 
         _playerClass.Move(moveInput);

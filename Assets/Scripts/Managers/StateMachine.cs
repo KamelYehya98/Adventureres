@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Player;
-using Assets.Scripts.Player.States;
+﻿using Assets.Scripts.Player.States;
 using UnityEngine;
 
 namespace Assets.Scripts.Managers

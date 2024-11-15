@@ -1,4 +1,4 @@
-using Assets.Scripts.Classes;
+using Assets.Scripts.Player;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemiies
@@ -8,7 +8,7 @@ namespace Assets.Scripts.Enemiies
         public GameObject projectilePrefab;
         private Transform _firePoint;
 
-        protected override void Attack(PlayerController player)
+        protected override void Attack(PlayerCoreController player)
         {
             if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
             {
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Enemiies
             }
         }
 
-        private void ShootProjectile(PlayerController player)
+        private void ShootProjectile(PlayerCoreController player)
         {
             _firePoint = GetComponent<Transform>();
 

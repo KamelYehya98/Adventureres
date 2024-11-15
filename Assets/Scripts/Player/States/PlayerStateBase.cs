@@ -1,14 +1,12 @@
-﻿using Assets.Scripts.Classes;
-using Assets.Scripts.Managers;
-using Unity;
+﻿using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Player.States
 {
     public class PlayerStateBase : State
     {
-        protected PlayerController playerController;
-        protected PlayerInputController inputController;
         protected InventoryManager inventoryManager;
+        protected PlayerCoreController playerController;
+        protected PlayerInputController inputController;
         protected AnimationManager animationManager;
         protected PlayerSpells playerSpells;
 
@@ -16,11 +14,13 @@ namespace Assets.Scripts.Player.States
         {
             base.OnEnter(_stateMachine);
 
-            playerController = GetComponent<PlayerController>();
-            inventoryManager = GetComponent<InventoryManager>();
+
+            playerController = GetComponent<PlayerCoreController>();
             animationManager = GetComponent<AnimationManager>();
             inputController = GetComponent<PlayerInputController>();
             playerSpells = GetComponent<PlayerSpells>();
+
+            inventoryManager = playerController.GetComponentInChildren<InventoryManager>();
         }
 
         public override void OnUpdate()

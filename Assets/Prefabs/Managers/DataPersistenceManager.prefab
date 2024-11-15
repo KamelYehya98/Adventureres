@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6693963766977745178}
+  - component: {fileID: 8229646160004248049}
   m_Layer: 0
   m_Name: DataPersistenceManager
   m_TagString: Untagged
@@ -31,3 +32,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8229646160004248049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429838243534334998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c5b3aa39ba3e945aa36698153ed1b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: data.hasagi
+  autoSaveTimeSeconds: 10000

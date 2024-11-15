@@ -37,3 +37,11 @@ MonoBehaviour:
     - {fileID: 1571249338, guid: e70999935ab59234e9157449bdacc3a4, type: 3}
     - {fileID: 483489346, guid: e70999935ab59234e9157449bdacc3a4, type: 3}
     - {fileID: -1033102635, guid: e70999935ab59234e9157449bdacc3a4, type: 3}
+  attackForceOnPlayer:
+  - 4
+  - 5
+  - 3
+  attackForceOnOthers:
+  - 100
+  - 100
+  - 100

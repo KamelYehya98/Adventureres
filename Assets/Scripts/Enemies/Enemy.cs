@@ -1,6 +1,7 @@
-using Assets.Scripts.Classes;
+using Assets.Scripts.Effects.FlashOnHit;
 using Assets.Scripts.Enemies;
-using Assets.Scripts.Enemies.GreenSlime;
+using Assets.Scripts.Player;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,46 +10,52 @@ namespace Assets.Scripts.Enemiies
 {
     public abstract class Enemy : MonoBehaviour
     {
-        protected EnemyData enemyData;
+        private bool _hasSpottedPlayer;
+
         public EnemyAnimationManager animationManager;
+        public FlashOnHit flashOnHit;
+        public LayerMask obstacleMask;
+
+        [SerializeField] protected bool canAttack;
+        [SerializeField] protected bool isAttacking;
+
+        protected EnemyData enemyData;
         protected NavMeshAgent navMeshAgent;
         protected Transform targetPlayerTransform;
         protected Vector3 lastPlayerPosition;
 
-        public LayerMask obstacleMask;
-
-        private bool _hasSpottedPlayer;
-        [SerializeField] protected bool canAttack;
-        [SerializeField] protected bool isAttacking;
-
+        private bool isStunned;
+        private float stunDuration;
         protected virtual void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             animationManager = GetComponent<EnemyAnimationManager>();
+            flashOnHit = GetComponent<FlashOnHit>();
 
             ApplyNavMeshAgentSettings();
 
             _hasSpottedPlayer = false;
             canAttack = false;
             isAttacking = false;
+            isStunned = false;
+            stunDuration = 1.5f;
         }
 
         protected void FixedUpdate()
         {
-            if(navMeshAgent != null && navMeshAgent.velocity != null && animationManager != null)
+            if (navMeshAgent != null && navMeshAgent.velocity != null && animationManager != null)
             {
                 Vector2 velocity = navMeshAgent.velocity;
-                if (animationManager.rb != null && !isAttacking)
+                if (animationManager.rb != null && !isAttacking && !isStunned)
                 {
                     animationManager.rb.velocity = new Vector2(velocity.x, velocity.y);
                 }
             }
-
         }
 
         private void CanAttackCheck()
         {
-            if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown)
+            if (Time.time >= enemyData.lastAttackTime + enemyData.attackCooldown && !isStunned)
             {
                 canAttack = true;
             }
@@ -64,7 +71,7 @@ namespace Assets.Scripts.Enemiies
 
             FindClosestPlayer();
 
-            if(!isAttacking)
+            if (!isAttacking && !isStunned)
             {
                 if (animationManager != null && enemyData.health > 0)
                 {
@@ -107,10 +114,22 @@ namespace Assets.Scripts.Enemiies
             }
         }
 
+        public void KnockBackEffect(Vector2 force)
+        {
+
+            animationManager.rb.AddForce(force, ForceMode2D.Impulse);
+
+        }
         public void TakeDamage(float damage)
         {
             if(enemyData.health > 0)
             {
+                isStunned = true;
+
+                StopCoroutine(RemoveStun());
+
+                flashOnHit.Flash();
+
                 enemyData.health -= damage;
 
                 if (enemyData.health <= 0)
@@ -121,16 +140,49 @@ namespace Assets.Scripts.Enemiies
                 {
                     animationManager.TakeDamage();
                 }
+
+                StartCoroutine(RemoveStun());
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private IEnumerator RemoveStun()
         {
+            yield return new WaitForSeconds(stunDuration);
 
+            isStunned = false;
+        }
+
+        //private void OnTriggerEnter2D(Collider2D other)
+        //{
+        //    //if(other.gameObject.GetComponent<WeaponController>() is WeaponController weaponController && weaponController != null)
+        //    //{
+        //    //    if (weaponController.playerCoreController.animationManager.animator.GetFloat("Weapon.Active") == 1f)
+        //    //    {
+        //    //        //Attack();
+        //    //        Debug.LogWarning("On trigger entered");
+
+        //    //        KnockBackEffect(weaponController.playerCoreController.GetFacingForce() * weaponController.weaponData.attackForceOnOthers[weaponController.currentComboIndex]);
+        //    //        TakeDamage(10);
+        //    //    }
+
+        //    //}
+        //}
+
+        public void OnCollisionEnter2D(Collision2D other)
+        {
+            if(other.gameObject.GetComponentInChildren<TeamComponent>() is TeamComponent teamComponenet)
+            {
+                if(teamComponenet.teamIndex == TeamIndex.Player)
+                {
+                    Debug.LogWarning("Player took damage");
+                    other.gameObject.GetComponentInChildren<PlayerCoreController>().TakeDamage(10);
+                }
+            }
         }
 
         private void Die()
         {
+            animationManager.rb.velocity = Vector2.zero;
             animationManager.Die();
         }
 
@@ -148,7 +200,11 @@ namespace Assets.Scripts.Enemiies
 
             navMeshAgent.stoppingDistance = enemyData.stoppingDistance;
 
-            if (IsPlayerInRange())
+            if (isStunned)
+            {
+                navMeshAgent.isStopped = true;
+            }
+            else if (IsPlayerInRange() && !isStunned)
             {
                 navMeshAgent.isStopped = false; // Allow the agent to move
                 navMeshAgent.SetDestination(targetPlayerTransform.position);
@@ -156,7 +212,7 @@ namespace Assets.Scripts.Enemiies
                 if (IsPlayerInLineOfSight() && canAttack)
                 {
                     // Only attack if there is a line of sight                    
-                    Attack(targetPlayerTransform.GetComponent<PlayerController>());
+                    Attack(targetPlayerTransform.GetComponent<PlayerCoreController>());
                 }
                 else
                 {
@@ -171,14 +227,14 @@ namespace Assets.Scripts.Enemiies
             }
         }
 
-        protected abstract void Attack(PlayerController player);
+        protected abstract void Attack(PlayerCoreController player);
 
         private void FindClosestPlayer()
         {
-            PlayerController[] players = FindObjectsOfType<PlayerController>();
+            PlayerCoreController[] players = FindObjectsOfType<PlayerCoreController>();
             if (players.Length == 0) return;
 
-            PlayerController closestPlayer = players.OrderBy(p => Vector2.Distance(transform.position, p.transform.position)).FirstOrDefault();
+            PlayerCoreController closestPlayer = players.OrderBy(p => Vector2.Distance(transform.position, p.transform.position)).FirstOrDefault();
             if (closestPlayer != null)
             {
                 targetPlayerTransform = closestPlayer.transform;

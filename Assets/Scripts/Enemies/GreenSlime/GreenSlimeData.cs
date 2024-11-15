@@ -5,13 +5,13 @@
         public GreenSlimeData() 
         {
             enemyName = "Green Slime";
-            health = 50;
+            health = 100;
             attackPower = 5;
             attackRange = 7;
             attackCooldown = 4;
             lastAttackTime = 0;
-            moveSpeed = 2;
-            stoppingDistance = 0.5f;
+            moveSpeed = 1.5f;
+            stoppingDistance = 4f;
         }
     }
 }
