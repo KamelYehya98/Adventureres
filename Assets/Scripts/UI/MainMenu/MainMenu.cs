@@ -14,7 +14,7 @@ namespace Assets.Scripts.UI.MainMenu
         [SerializeField] private Button newGameButton;
         [SerializeField] private Button loadGameButton;
 
-        private void Start()
+        public void Start()
         {
             DisableButtonsDependingOnData();
         }
@@ -42,7 +42,7 @@ namespace Assets.Scripts.UI.MainMenu
             saveSlotsMenu.ActivateMenu(true);
         }
 
-        private void DisableMenuButtons()
+        public void DisableMenuButtons()
         {
             newGameButton.interactable = false;
         }

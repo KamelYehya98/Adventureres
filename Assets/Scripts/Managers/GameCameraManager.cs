@@ -1,16 +1,16 @@
 ﻿using Cinemachine;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Managers
 {
-    public class PlayerCameraManager : MonoBehaviour
+    public class GameCameraManager : MonoBehaviour
     {
-        public List<CinemachineVirtualCamera> playerCameras = new List<CinemachineVirtualCamera>();
-        public List<Camera> mainCameras = new List<Camera>();
+        public List<CinemachineVirtualCamera> virtualCameras = new ();
+        public List<Camera> mainCameras = new();
 
-        private static PlayerCameraManager _instance;
-        public static PlayerCameraManager Instance
+        private static GameCameraManager _instance;
+        public static GameCameraManager Instance
         {
             get
             {
@@ -22,18 +22,7 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        private static void SetupInstance()
-        {
-            _instance = FindObjectOfType<PlayerCameraManager>();
-            if (_instance == null)
-            {
-                GameObject gameObj = new GameObject("PlayerCameraManager");
-                _instance = gameObj.AddComponent<PlayerCameraManager>();
-                DontDestroyOnLoad(gameObj);
-            }
-        }
-
-        private void Awake()
+        public void Awake()
         {
             if (_instance == null)
             {
@@ -46,22 +35,33 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        private void Start()
+        public void Start()
         {
             SetupInstance();
             SetupCameras();
         }
 
+        private static void SetupInstance()
+        {
+            _instance = FindObjectOfType<GameCameraManager>();
+            if (_instance == null)
+            {
+                GameObject gameObj = new GameObject("PlayerCameraManager");
+                _instance = gameObj.AddComponent<GameCameraManager>();
+                DontDestroyOnLoad(gameObj);
+            }
+        }
+
         private void SetupCameras()
         {
-            int playerCount = playerCameras.Count;
+            int playerCount = virtualCameras.Count;
 
             for (int i = 0; i < playerCount; i++)
             {
                 if (mainCameras[i] != null)
                 {
                     mainCameras[i].rect = GetViewportRect(i, playerCount);
-                    playerCameras[i].Priority = 10;
+                    virtualCameras[i].Priority = 10;
                     Debug.Log($"Setting viewport for player {i} with rect {GetViewportRect(i, playerCount)}");
                 }
                 else
@@ -110,7 +110,7 @@ namespace Assets.Scripts.Managers
                 return;
             }
 
-            playerCameras.Add(vcam);
+            virtualCameras.Add(vcam);
             mainCameras.Add(mainCam);
 
             Debug.Log($"Added player camera: {vcam} and main camera: {mainCam}");

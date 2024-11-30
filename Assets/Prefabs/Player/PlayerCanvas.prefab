@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 9011955497464755112}
   - component: {fileID: 3214440831096313255}
   - component: {fileID: 5664061739234991383}
+  - component: {fileID: 1411918781201059239}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: Untagged
@@ -635,6 +636,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4305605696830881326, guid: dbcbf4c6888577f48841d5eb80270b33, type: 3}
+--- !u!114 &1411918781201059239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359309153748576616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d81724dcab6f2f44b02dc52bdc7c120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCanvas: {fileID: 6391017156214106834}
 --- !u!1 &3748039160337295596
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dfb41d8e3081b447bc5dca8a487519b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 4498867701341219307, guid: dbcbf4c6888577f48841d5eb80270b33, type: 3}
+  inventoryManager: {fileID: 0}
   itemsToPickup:
   - {fileID: 11400000, guid: 044a7bfd03697c5439632c27b44944a3, type: 2}
   - {fileID: 11400000, guid: 00547c1bed5aa324e8663a97e981abf3, type: 2}

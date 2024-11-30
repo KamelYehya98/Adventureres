@@ -6,30 +6,55 @@ namespace Assets.Scripts.Managers
     public class StateMachine : MonoBehaviour
     {
         public string customName;
-
-        private State mainStateType;
-
         public State CurrentState { get; private set; }
-        private State nextState;
 
-        void Update()
+        private State _nextState;
+        private State _mainStateType;
+
+
+        public void Awake()
         {
-            if (nextState != null)
+            _mainStateType = new IdleState();
+
+            UnityEditor.EditorApplication.delayCall += () =>
             {
-                SetState(nextState);
+                if (_mainStateType == null)
+                {
+                    if (customName == "Player")
+                    {
+                        _mainStateType = new IdleState();
+                    }
+                }
+            };
+
+            SetNextStateToMain();
+        }
+
+        public void FixedUpdate()
+        {
+            CurrentState?.OnFixedUpdate();
+        }
+
+        public void Update()
+        {
+            if (_nextState != null)
+            {
+                SetState(_nextState);
             }
 
-            if (CurrentState != null)
-                CurrentState.OnUpdate();
+            CurrentState?.OnUpdate();
+        }
+
+        public void LateUpdate()
+        {
+            CurrentState?.OnLateUpdate();
         }
 
         private void SetState(State _newState)
         {
-            nextState = null;
-            if (CurrentState != null)
-            {
-                CurrentState.OnExit();
-            }
+            _nextState = null;
+
+            CurrentState?.OnExit();
             CurrentState = _newState;
             CurrentState.OnEnter(this);
         }
@@ -38,43 +63,13 @@ namespace Assets.Scripts.Managers
         {
             if (_newState != null)
             {
-                nextState = _newState;
+                _nextState = _newState;
             }
-        }
-
-        private void LateUpdate()
-        {
-            if (CurrentState != null)
-                CurrentState.OnLateUpdate();
-        }
-
-        private void FixedUpdate()
-        {
-            if (CurrentState != null)
-                CurrentState.OnFixedUpdate();
         }
 
         public void SetNextStateToMain()
         {
-            nextState = mainStateType;
-        }
-
-        private void Awake()
-        {
-            mainStateType = new IdleCombatState();
-
-            UnityEditor.EditorApplication.delayCall += () =>
-            {
-                if (mainStateType == null)
-                {
-                    if (customName == "Player")
-                    {
-                        mainStateType = new IdleCombatState();
-                    }
-                }
-            };
-
-            SetNextStateToMain();
+            _nextState = _mainStateType;
         }
     }
 }

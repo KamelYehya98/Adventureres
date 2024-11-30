@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc783d48e44e2c046b30cd95fccf5480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCameras: []
+  virtualCameras: []
   mainCameras: []

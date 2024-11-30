@@ -5,7 +5,7 @@ namespace Assets.Scripts.Managers
 {
     public class InventoryDemoScript : MonoBehaviour
     {
-        public InventoryManager inventoryManager;
+        public PlayerInventoryManager inventoryManager;
         public ItemData[] itemsToPickup;
 
         public void PickupItem(int id)

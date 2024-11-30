@@ -58,6 +58,7 @@ namespace Assets.Scripts.Data
             Index = index;
         }
     }
+
     // Vitality: Player HP and Max HP
     // Regeneration: Player HP and Mana regeneration rate
     // CriticalStrike: chance percentage to perform a strike that deals x2 the damage

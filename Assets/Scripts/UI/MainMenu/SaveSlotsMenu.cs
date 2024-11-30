@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Data;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using Assets.Scripts.Data;
 using Assets.Scripts.Managers;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.MainMenu
 {
@@ -27,14 +27,13 @@ namespace Assets.Scripts.UI.MainMenu
 
         private List<Button> saveSlots;
 
-        private void Awake()
+        public void Awake()
         {
             //saveSlots = this.GetComponentsInChildren<SaveSlot>();
         }
 
         public void OnSaveSlotClicked(GameData gameData)
         {
-            // Disable all buttons
             if(gameData != null)
             {
                 DisableSaveSlotsButtons();

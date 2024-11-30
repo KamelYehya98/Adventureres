@@ -16,7 +16,7 @@ namespace Assets.Scripts.Enemiies
             Destroy(gameObject, _lifetime);
         }
 
-        private void Update()
+        public void Update()
         {
             transform.position += speed * Time.deltaTime * _direction;
         }
@@ -25,16 +25,16 @@ namespace Assets.Scripts.Enemiies
         {
             //Debug.Log("Projectile collided with: " + other.gameObject.name);
 
-            if (other.TryGetComponent<PlayerCoreController>(out var player))
-            {
-                //Debug.Log("Projectile collided with player");
-                player.TakeDamage(damage);
-                Destroy(gameObject);
-            }
-            else if (other.CompareTag("Obstacle"))
-            {
-                Destroy(gameObject);
-            }
+            //if (other.TryGetComponent<PlayerCoreController>(out var player))
+            //{
+            //    //Debug.Log("Projectile collided with player");
+            //    player.TakeDamage(damage);
+            //    Destroy(gameObject);
+            //}
+            //else if (other.CompareTag("Obstacle"))
+            //{
+            //    Destroy(gameObject);
+            //}
         }
     }
 

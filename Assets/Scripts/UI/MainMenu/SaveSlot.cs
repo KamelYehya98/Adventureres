@@ -1,14 +1,14 @@
-﻿using Assets.Scripts.Data;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Data;
 
 namespace Assets.Scripts.UI.MainMenu
 {
     public class SaveSlot : MonoBehaviour
     {
         [Header("Profile")]
-        [SerializeField] private string profileId = "";
+        [SerializeField] private string _profileId = "";
 
         [Header("Content")]
         [SerializeField] private GameObject noDataContent;
@@ -23,14 +23,13 @@ namespace Assets.Scripts.UI.MainMenu
 
         private Button saveSlotButton;
 
-        private void Awake()
+        public void Awake()
         {
             saveSlotButton = this.GetComponent<Button>();
         }
 
         public void SetData(GameData data)
         {
-            // there's no data for this profileId
             if (data == null)
             {
                 hasData = false;
@@ -38,7 +37,6 @@ namespace Assets.Scripts.UI.MainMenu
                 hasDataContent.SetActive(false);
                 clearButton.gameObject.SetActive(false);
             }
-            // there is data for this profileId
             else
             {
                 hasData = true;
@@ -50,7 +48,7 @@ namespace Assets.Scripts.UI.MainMenu
 
         public string GetProfileId()
         {
-            return this.profileId;
+            return this._profileId;
         }
 
         public void SetInteractable(bool interactable)

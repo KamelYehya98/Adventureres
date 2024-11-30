@@ -6,56 +6,25 @@ using UnityEngine;
 
 namespace Assets.Scripts.Managers
 {
-    public class InventoryManager : MonoBehaviour, IDataPersistence
+    public class PlayerInventoryManager : MonoBehaviour, IDataPersistence
     {
         [SerializeField]
+        private PlayerCoreController coreController;
+
         public ItemsManager itemManager;
 
-        private int _maxStackCount = 4;
-
-        [SerializeField]
         public InventorySlot[] inventorySlots;
         public GameObject inventoryItemPrefab;
 
-        private CharacterStateManager stateManager;
-        private PlayerCoreController PlayerController;
+        private readonly int _maxStackCount = 999;
+        private int _selectedSlot;
 
-        int selectedSlot = -1;
-
-        private void Awake()
+        public void Awake()
         {
-            PlayerController = GetComponentInParent<PlayerCoreController>();
-            stateManager = GetComponentInParent<CharacterStateManager>();
+            _selectedSlot = -1;
         }
 
-        public void ChangeSelectedSlot(int newValue)
-        {
-            if(selectedSlot >= 0)
-            {
-                inventorySlots[selectedSlot].DeSelect();
-            }
-
-            inventorySlots[newValue].Select();
-            selectedSlot = newValue;
-
-            InventoryItem itemInSlot = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null && itemInSlot.item != null)
-            {
-                Debug.Log("Item in slot type: " + itemInSlot.item.type.ToString());
-
-                if (itemInSlot.item.type == ItemType.Sword)
-                {
-                    Debug.Log("Equiped item is sword");
-
-                    PlayerController.weaponComponent.SetWeapon(itemInSlot.item);
-                    stateManager.meleeStateMachine.SetNextStateToMain();
-                }
-            }
-
-
-        }
-
-        private void Update()
+        public void Update()
         {
             if (Input.inputString != null)
             {
@@ -64,6 +33,26 @@ namespace Assets.Scripts.Managers
                 {
                     ChangeSelectedSlot(number - 1);
                 }
+            }
+        }
+
+        public void ChangeSelectedSlot(int newValue)
+        {
+            if(_selectedSlot >= 0)
+            {
+                inventorySlots[_selectedSlot].DeSelect();
+            }
+
+            inventorySlots[newValue].Select();
+            _selectedSlot = newValue;
+
+            InventoryItem itemInSlot = inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot != null && itemInSlot.item != null)
+            {
+                Debug.Log("Item in slot type: " + itemInSlot.item.type.ToString());
+
+                EquipItemIfWeapon(itemInSlot);
             }
         }
 
@@ -102,17 +91,17 @@ namespace Assets.Scripts.Managers
         {
             GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
             InventoryItem inventoryItem = newItem.GetComponent<InventoryItem>();
+
             inventoryItem.InitializeItem(item);
         }
 
         public ItemData GetSelectedItem(bool use)
         {
-            InventorySlot slot = inventorySlots[selectedSlot];
+            InventorySlot slot = inventorySlots[_selectedSlot];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
             if(itemInSlot != null)
             {
-                ItemData item = itemInSlot.item;
-
                 if(use)
                 {
                     itemInSlot.count--;
@@ -133,9 +122,9 @@ namespace Assets.Scripts.Managers
 
         public ItemType GetCurrentItemType()
         {
-            return selectedSlot == -1 || inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>() is null
+            return _selectedSlot == -1 || inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>() is null
                 ? ItemType.None
-                : inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().item.type;
+                : inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>().item.type;
         }
 
         public void LoadData(GameData gameData)
@@ -182,6 +171,17 @@ namespace Assets.Scripts.Managers
                         gameData.PlayerData.Inventory.Add(inventoryItemData, inventoryItem.count);
                     }
                 }
+            }
+        }
+
+        private void EquipItemIfWeapon(InventoryItem inventoryItem)
+        {
+            if (inventoryItem.item.type == ItemType.Sword)
+            {
+                Debug.Log("Equiped item is sword");
+
+                coreController.combatController.ChangeWeapon(inventoryItem.item);
+                coreController.stateManager.meleeStateMachine.SetNextStateToMain();
             }
         }
     }

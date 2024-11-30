@@ -1,22 +1,28 @@
-﻿using Assets.Scripts.Player;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Enemiies
 {
-    public class MeleeEnemy : Enemy
+    public class MeleeEnemy : EnemyControllerBase
     {
-        protected override void Attack(PlayerCoreController player)
+        protected override void Attack()
         {
             Debug.LogWarning("Melee Enemey Attacking State");
 
             flashOnHit.Flash(false);
 
-            navMeshAgent.isStopped = true;
+            movementController.underAttack = true;
 
-            isAttacking = true;
+            movementController.navMeshAgent.isStopped = true;
 
-            enemyData.lastAttackTime = Time.time;
+            statsController.enemyData.lastAttackTime = Time.time;
+        }
+
+        protected void Update()
+        {
+            if (movementController.isAttacking && !movementController.underAttack)
+            {
+                Attack();
+            }
         }
     }
-
 }

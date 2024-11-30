@@ -14,17 +14,16 @@ namespace Assets.Scripts.UI.MainMenu
         [SerializeField] private MainMenu mainMenu;
         [SerializeField] private GameObject backButtonObject;
 
-        private string _playerNameText;
-        private PlayerDataManager _playerDataManager;
+        public GameManager gameManager;
 
-        private void Start()
+        private string _playerNameText;
+
+        public void Start()
         {
             if(string.IsNullOrEmpty(playerNameInput.textComponent.text))
             {
                 startGameBtn.enabled = false;
             }
-
-            _playerDataManager = FindObjectOfType<PlayerDataManager>();
         }
 
         private void HandleBackButton()
@@ -66,7 +65,7 @@ namespace Assets.Scripts.UI.MainMenu
 
             SceneManager.LoadSceneAsync("SampleScene");
 
-            _playerDataManager.AddNewPlayer(_playerNameText);
+            gameManager.AddNewPlayerToGameData(_playerNameText);
         }
     }
 }

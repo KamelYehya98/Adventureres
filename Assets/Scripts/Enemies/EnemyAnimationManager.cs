@@ -1,32 +1,46 @@
 ﻿using Assets.Scripts.Enemiies;
-using System;
 using UnityEngine;
+using System;
 
 namespace Assets.Scripts.Enemies
 {
     public class EnemyAnimationManager : MonoBehaviour
     {
+        [SerializeField]
+        private EnemyControllerBase controllerBase;
 
-        public Animator animator;
         public SpriteRenderer spriteRenderer;
-        public Rigidbody2D rb;
+        public Animator animator;
 
         private string _currentState;
 
-        // Animation Control
         public bool facingHorizontal;
         public bool facingUp;
         public bool facingDown;
 
+        private bool _isMoving;
+
         public void Awake()
         {
-            animator = GetComponent<Animator>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            rb = GetComponent<Rigidbody2D>();
-
             facingHorizontal = true;
             facingUp = false;
             facingDown = false;
+
+            _isMoving = false;
+        }
+
+        public void FixedUpdate()
+        {
+            CheckIsMoving();
+        }
+
+        public void Update()
+        {
+            if(!controllerBase.movementController.isDead)
+            {
+                ManageAnimationStates();
+                ManageAnimationDirections();
+            }
         }
 
         public void ChangeAnimatorState(string newState)
@@ -38,25 +52,29 @@ namespace Assets.Scripts.Enemies
                     return;
                 }
 
+                animator.StopPlayback();
                 animator.Play(newState);
 
                 _currentState = newState;
             }
         }
 
-        public void TakeDamage()
+        public void TakeDamageAnimation()
         {
-            if (facingHorizontal)
+            if (!controllerBase.movementController.isDead)
             {
-                ChangeAnimatorState(GenericEnemyAnimationStates.DamageRight);
-            }
-            else if (facingDown)
-            {
-                ChangeAnimatorState(GenericEnemyAnimationStates.DamageDown);
-            }
-            else if (facingUp)
-            {
-                ChangeAnimatorState(GenericEnemyAnimationStates.DamageUp);
+                if (facingHorizontal)
+                {
+                    ChangeAnimatorState(GenericEnemyAnimationStates.DamageRight);
+                }
+                else if (facingDown)
+                {
+                    ChangeAnimatorState(GenericEnemyAnimationStates.DamageDown);
+                }
+                else if (facingUp)
+                {
+                    ChangeAnimatorState(GenericEnemyAnimationStates.DamageUp);
+                }
             }
         }
 
@@ -65,44 +83,9 @@ namespace Assets.Scripts.Enemies
             ChangeAnimatorState(GenericEnemyAnimationStates.Death);
         }
 
-        public void MovementAnimation()
+        private void ManageAnimationStates()
         {
-            bool isMoving = rb.velocity != Vector2.zero;
-
-            if (isMoving)
-            {
-                if (Math.Abs(rb.velocity.x) > Math.Abs(rb.velocity.y))
-                {
-                    facingHorizontal = true;
-                    facingDown = false;
-                    facingUp = false;
-                }
-                else if (Math.Abs(rb.velocity.x) < Math.Abs(rb.velocity.y))
-                {
-                    facingHorizontal = false;
-                    if (rb.velocity.y > 0)
-                    {
-                        facingUp = true;
-                        facingDown = false;
-                    }
-                    else
-                    {
-                        facingDown = true;
-                        facingUp = false;
-                    }
-                }
-            }
-
-            if (rb.velocity.x > 0)
-            {
-                spriteRenderer.flipX = false;
-            }
-            else if (rb.velocity.x < 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-
-            if (isMoving)
+            if (_isMoving)
             {
                 if (facingHorizontal)
                 {
@@ -137,5 +120,45 @@ namespace Assets.Scripts.Enemies
             }
         }
 
+        private void CheckIsMoving()
+        {
+            _isMoving = controllerBase.movementController.rb.velocity != Vector2.zero;
+        }
+
+        private void ManageAnimationDirections()
+        {
+            if (_isMoving)
+            {
+                if (Math.Abs(controllerBase.movementController.rb.velocity.x) > Math.Abs(controllerBase.movementController.rb.velocity.y))
+                {
+                    facingHorizontal = true;
+                    facingDown = false;
+                    facingUp = false;
+                }
+                else if (Math.Abs(controllerBase.movementController.rb.velocity.x) < Math.Abs(controllerBase.movementController.rb.velocity.y))
+                {
+                    facingHorizontal = false;
+                    if (controllerBase.movementController.rb.velocity.y > 0)
+                    {
+                        facingUp = true;
+                        facingDown = false;
+                    }
+                    else
+                    {
+                        facingDown = true;
+                        facingUp = false;
+                    }
+                }
+            }
+
+            if (controllerBase.movementController.rb.velocity.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (controllerBase.movementController.rb.velocity.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+        }
     }
 }

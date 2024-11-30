@@ -1717,6 +1717,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 834529693643175615, guid: b354241f96f364e45bc488071b32ae4c, type: 3}
+      propertyPath: mainCameras.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 834529693643175615, guid: b354241f96f364e45bc488071b32ae4c, type: 3}
+      propertyPath: virtualCameras.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6836648603698159064, guid: b354241f96f364e45bc488071b32ae4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3402,6 +3410,7 @@ MonoBehaviour:
   startGameBtn: {fileID: 1745357823}
   mainMenu: {fileID: 2034787013}
   backButtonObject: {fileID: 710065973}
+  gameManager: {fileID: 0}
 --- !u!1 &1954412416
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,6 +3545,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954412416}
   m_CullTransparentMesh: 1
+--- !u!114 &1968983306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7757391507451347620, guid: ef6964041c3578c43a8b4bd8f76c825f, type: 3}
+  m_PrefabInstance: {fileID: 1245588201}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9362665576846234aa4fd28a70ec7a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2034787011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,6 +3755,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8229646160004248049, guid: 45ed3c37b42ffd243b487b607ec19ea9, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1968983306}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

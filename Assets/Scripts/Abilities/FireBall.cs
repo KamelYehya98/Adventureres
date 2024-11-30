@@ -40,7 +40,7 @@ namespace Assets.Scripts.Abilities
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                EnemyControllerBase enemy = collision.gameObject.GetComponent<EnemyControllerBase>();
                 enemy.TakeDamage(damage);
             }
             Destroy(gameObject);

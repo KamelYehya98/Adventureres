@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c5b3aa39ba3e945aa36698153ed1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.hasagi
-  autoSaveTimeSeconds: 10000
+  _fileName: data.hasagi
+  gameManager: {fileID: 7757391507451347620, guid: ef6964041c3578c43a8b4bd8f76c825f, type: 3}

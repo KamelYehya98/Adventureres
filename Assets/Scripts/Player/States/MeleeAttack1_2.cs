@@ -9,11 +9,12 @@ namespace Assets.Scripts.Player.States
         {
             base.OnEnter(_stateMachine);
 
-            // Attack
             attackIndex = 2;
-            duration = 0.417f;  // Second attack duration
-            animationManager.StartAttackAnimation("Attack " + attackIndex);
-            weaponController.SetComboIndex(attackIndex - 1);
+            duration = 0.417f;
+
+            StartAttackAnimation("Attack " + attackIndex);
+            SetComboIndex(attackIndex - 1);
+            ResetAttackBufferOnAttack();
 
             Debug.Log("Player Attack " + attackIndex + " Fired!");
         }
@@ -22,22 +23,17 @@ namespace Assets.Scripts.Player.States
         {
             base.OnUpdate();
 
-            if (animationManager.animator.GetFloat("AttackWindow.Open") > 0f && inputController.attackInput == 1)
-            {
-                shouldCombo = true;  // Allow combo if the attack input was pressed in the attack window
-                AttackPressedTimer = 0;  // Reset the input buffer
-                inputController.attackInput = 0;
-            }
+            CheckIfShouldCombo();
 
-            if (fixedtime >= duration)
+            if (time >= duration)
             {
                 if (shouldCombo)
                 {
-                    stateMachine.SetNextState(new MeleeAttack1_3()); // Transition to the third attack
+                    stateMachine.SetNextState(new MeleeAttack1_3());
                 }
                 else
                 {
-                    stateMachine.SetNextStateToMain(); // Return to main state
+                    stateMachine.SetNextStateToMain();
                 }
             }
         }

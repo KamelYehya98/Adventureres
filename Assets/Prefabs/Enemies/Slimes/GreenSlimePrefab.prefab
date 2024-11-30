@@ -13,11 +13,13 @@ GameObject:
   - component: {fileID: 2307112948480598493}
   - component: {fileID: 8605758325553641421}
   - component: {fileID: 777494001206761470}
-  - component: {fileID: 2689389461356969213}
-  - component: {fileID: -4263771513565081794}
   - component: {fileID: 6484171263415294456}
   - component: {fileID: 7185318674989836216}
   - component: {fileID: 6135825701203950725}
+  - component: {fileID: 5905663823933479470}
+  - component: {fileID: 1703397762924400066}
+  - component: {fileID: 3392829979702695682}
+  - component: {fileID: 1176984658594899541}
   m_Layer: 8
   m_Name: GreenSlimePrefab
   m_TagString: Untagged
@@ -162,37 +164,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2689389461356969213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390441308764185075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075c353bf401b394e8777a57b2b70b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 777494001206761470}
-  spriteRenderer: {fileID: 3074172547831216058}
-  rb: {fileID: 2307112948480598493}
-  facingHorizontal: 0
-  facingUp: 0
-  facingDown: 0
---- !u!114 &-4263771513565081794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390441308764185075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b6657172acedbe4a9ddf0e7b7cc1cef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _teamIndex: 2
 --- !u!70 &6484171263415294456
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -240,13 +211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87d0fe8ce7a23d4fb36f48372c289d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationManager: {fileID: 2689389461356969213}
+  movementController: {fileID: 5905663823933479470}
+  animationManager: {fileID: 1703397762924400066}
+  statsController: {fileID: 3392829979702695682}
   flashOnHit: {fileID: 6135825701203950725}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
-  canAttack: 0
-  isAttacking: 0
   chargeDuration: 0.5
   jumpForce: 1
 --- !u!114 &6135825701203950725
@@ -264,3 +235,70 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 73a76ceec47fb8c4198058003b53f2cd, type: 2}
   flash_2_Material: {fileID: 2100000, guid: ae287887a672def4597d1650ce691f9e, type: 2}
   duration: 0.2
+--- !u!114 &5905663823933479470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390441308764185075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdd6d69b2a8f1c4d8adf06cc4c0cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerBase: {fileID: 7185318674989836216}
+  rb: {fileID: 2307112948480598493}
+  navMeshAgent: {fileID: 8605758325553641421}
+  targetPlayerTransform: {fileID: 0}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _canMove: 0
+  stunDuration: 0
+  isStunned: 0
+  isAttacking: 0
+  isDead: 0
+--- !u!114 &1703397762924400066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390441308764185075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075c353bf401b394e8777a57b2b70b61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerBase: {fileID: 7185318674989836216}
+  spriteRenderer: {fileID: 3074172547831216058}
+  animator: {fileID: 777494001206761470}
+  facingHorizontal: 0
+  facingUp: 0
+  facingDown: 0
+--- !u!114 &3392829979702695682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390441308764185075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ea186a6cca30c4ab3dc9911838a34c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1176984658594899541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390441308764185075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6657172acedbe4a9ddf0e7b7cc1cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamIndex: 2

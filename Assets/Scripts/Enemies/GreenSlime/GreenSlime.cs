@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Enemiies;
-using Assets.Scripts.Player;
 using System.Collections;
 using UnityEngine;
 
@@ -13,13 +12,14 @@ namespace Assets.Scripts.Enemies.GreenSlime
         private bool isCharging = false;
         private Vector2 chargeDirection;
 
-        protected void Awake()
+        public void Awake()
         {
-            enemyData = new GreenSlimeData();
+            statsController.InitializeData(new GreenSlimeData());
         }
-        protected override void Attack(PlayerCoreController player)
+
+        protected override void Attack()
         {
-            base.Attack(player);
+            base.Attack();
 
             StartCharge();
         }
@@ -35,15 +35,12 @@ namespace Assets.Scripts.Enemies.GreenSlime
 
         private IEnumerator ChargeAttack()
         {
-            // Wait for the charge duration
             yield return new WaitForSeconds(chargeDuration);
 
-            chargeDirection = ((Vector2)targetPlayerTransform.position - (Vector2)transform.position).normalized;
+            chargeDirection = movementController.GetDirectionToPlayer();
 
-            // Perform the jump (you may need to adjust based on movement code)
-            animationManager.rb.AddForce(chargeDirection * jumpForce, ForceMode2D.Impulse);
+            movementController.rb.AddForce(chargeDirection * jumpForce, ForceMode2D.Impulse);
 
-            // Reset charging state after the attack
             StartCoroutine(StopAttack());
         }
 
@@ -51,9 +48,14 @@ namespace Assets.Scripts.Enemies.GreenSlime
         {
             yield return new WaitForSeconds(0.5f);
 
-            isAttacking = false;
+            movementController.EndAttack();
+
             isCharging = false;
         }
 
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }

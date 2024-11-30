@@ -4,11 +4,16 @@
     {
         public string enemyName;
         public float health;
-        public int attackPower;
-        public float attackRange;
-        public float attackCooldown;
-        public float lastAttackTime;
         public float moveSpeed;
+        public float attackPower;
+
+        public float attackRange;
+        public float detectionRange;
+
+        public float lastAttackTime;
+        public float attackCooldown;
+        public float stunDuration;
+
         public float stoppingDistance;
     }
 }

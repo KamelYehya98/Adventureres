@@ -9,14 +9,12 @@ namespace Assets.Scripts.Player.States
         {
             base.OnEnter(_stateMachine);
 
-            //Attack
             attackIndex = 3;
             duration = 0.417f;
-            animationManager.StartAttackAnimation("Attack " + attackIndex);
-            weaponController.SetComboIndex(attackIndex - 1);
 
-            AttackPressedTimer = 0;  // Reset the input buffer
-            inputController.attackInput = 0;
+            StartAttackAnimation("Attack " + attackIndex);
+            SetComboIndex(attackIndex - 1);
+            ResetAttackBufferOnAttack();
 
             Debug.Log("Player Attack " + attackIndex + " Fired!");
         }
@@ -25,11 +23,12 @@ namespace Assets.Scripts.Player.States
         {
             base.OnUpdate();
 
-            if (fixedtime >= duration)
+            if (time >= duration)
             {
                 stateMachine.SetNextStateToMain();
             }
         }
+
         public override void OnExit()
         {
             base.OnExit();

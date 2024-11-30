@@ -1,4 +1,3 @@
-using Assets.Scripts.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,18 +5,37 @@ public class PlayerInputController : MonoBehaviour
 {
     public PlayerControls inputActions;
 
-    private PlayerCoreController _playerClass;
+    [SerializeField]
+    private string controlScheme;
+
     public Vector2 moveInput;
     public float attackInput;
 
-    private Animator _animator;
+    public void Awake()
+    {
+        moveInput = Vector2.zero;
+        attackInput = 0;
+    }
 
-    [SerializeField]
-    private string controlScheme;
+    public Vector2 GetMovementInput()
+    {
+        return moveInput;
+    }
+
+    public float GetAttackInput()
+    {
+        return attackInput;
+    }
+
+    public void ResetAttackInput()
+    {
+       // attackInput = 0;
+    }
 
     public void AssignControlScheme(string scheme)
     {
         controlScheme = scheme;
+
         if(inputActions == null)
         {
             inputActions = new PlayerControls();
@@ -34,29 +52,7 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        _playerClass = GetComponent<PlayerCoreController>();
-        _animator = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-        if(_playerClass == null)
-        {
-            _playerClass = GetComponent<PlayerCoreController>();
-        }
-
-        _playerClass.Move(moveInput);
-    }
-
-
-    private void OnDestroy()
+    public void OnDestroy()
     {
         inputActions.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled -= ctx => moveInput = Vector2.zero;

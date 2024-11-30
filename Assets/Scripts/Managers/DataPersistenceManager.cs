@@ -11,22 +11,22 @@ namespace Assets.Scripts.Managers
     public class DataPersistenceManager : MonoBehaviour
     {
         [Header("File Storage Config")]
-        [SerializeField] private string fileName;
+        [SerializeField] private string _fileName;
 
         [Header("Auto Saving Configuration")]
-        [SerializeField] private float autoSaveTimeSeconds = 10f;
+        [SerializeField] private readonly float _autoSaveTimeSeconds = 10f;
 
         private string selectedProfileId = "";
 
         private Coroutine autoSaveCoroutine;
 
         public static DataPersistenceManager Instance { get; private set; }
+        public GameManager gameManager;
 
         private List<IDataPersistence> _persistenceList = new();
         private FileDataManager _fileDataManager;
-        private GameData _gameData;
-
-        private void Awake()
+        
+        public void Awake()
         {
             if (Instance != null)
             {
@@ -34,27 +34,45 @@ namespace Assets.Scripts.Managers
                 Destroy(this.gameObject);
                 return;
             }
+
             Instance = this;
+
             DontDestroyOnLoad(this.gameObject);
 
-            _fileDataManager = new FileDataManager(Application.persistentDataPath, fileName);
+            _fileDataManager = new FileDataManager(Application.persistentDataPath, _fileName);
         }
 
-        private void OnEnable()
+        public void Start()
+        {
+            _persistenceList = FindAllDataPersistenceObjects();
+
+            gameManager = FindObjectOfType<GameManager>();
+
+            if (_persistenceList == null || _persistenceList.Count == 0)
+            {
+                Debug.LogError("Couldnt find any persistent objects");
+            }
+        }
+
+        public void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        public void OnApplicationQuit()
+        {
+            SaveGame();
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             _persistenceList = FindAllDataPersistenceObjects();
 
-            // start up the auto saving coroutine
             if (autoSaveCoroutine != null)
             {
                 StopCoroutine(autoSaveCoroutine);
@@ -65,45 +83,36 @@ namespace Assets.Scripts.Managers
 
         public void ChangeSelectedProfileId(string newProfileId)
         {
-            // update the profile to use for saving and loading
             this.selectedProfileId = newProfileId;
         }
 
-
         public void DeleteProfileData(string profileId)
         {
-            // delete the data for this profile id
             _fileDataManager.Delete(profileId);
         }
 
         public void NewGame()
         {
-            _gameData = new GameData()
+            GameData gameData = new()
             {
                 Id = Guid.NewGuid(),
                 PlayerData = new("Default Player")
             };
 
-            selectedProfileId = _gameData.Id.ToString();
-        }
+            gameManager.SetGameData(gameData);
 
-        private void Start()
-        {
-            _fileDataManager = new FileDataManager(Application.persistentDataPath, fileName);
-            _persistenceList = FindAllDataPersistenceObjects();
-            if(_persistenceList == null || _persistenceList.Count == 0)
-            {
-                Debug.LogError("Couldnt find any persistent objects");
-            }
+            selectedProfileId = gameData.Id.ToString();
         }
 
         public void LoadGame()
         {
             _persistenceList = FindAllDataPersistenceObjects();
 
-            _gameData = _fileDataManager.Load(selectedProfileId);
+            GameData gameData = _fileDataManager.Load(selectedProfileId);
 
-            if(_gameData == null)
+            gameManager.SetGameData(gameData);
+
+            if (gameData == null)
             {
                 Debug.LogError("Failed to laod game, creating a new one....");
                 NewGame();
@@ -111,35 +120,43 @@ namespace Assets.Scripts.Managers
 
             foreach (IDataPersistence dataPersistence in _persistenceList)
             {
-                dataPersistence.LoadData(_gameData);
+                dataPersistence.LoadData(gameData);
 
                 Debug.Log("Loaded game for dataPersistence object of type: " + dataPersistence.GetType().FullName);
             }
 
-            Debug.Log("Loaded game for player " + _gameData.PlayerData.PlayerName);
+
+            Debug.Log("Loaded game for player " + gameData.PlayerData.PlayerName);
         }
 
         public void SaveGame()
         {
-            if (_gameData == null)
+            if(gameManager == null)
             {
-                Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
+                Debug.LogError("game manager is null");
+            }
+
+            GameData gameData = gameManager.GetGameData();
+
+            if (gameData == null)
+            {
+                Debug.Log("No data was found. A New Game needs to be started before data can be saved.");
                 return;
             }
 
             foreach (IDataPersistence dataPersistence in _persistenceList)
             {
-                dataPersistence.SaveData(_gameData);
+                dataPersistence.SaveData(gameData);
             }
 
-            _gameData.LastUpdated = DateTime.Now.ToBinary();
+            gameData.LastUpdated = DateTime.Now.ToBinary();
 
-            _fileDataManager.Save(_gameData, selectedProfileId);
+            _fileDataManager.Save(gameData, selectedProfileId);
         }
 
         public bool HasGameData()
         {
-            return _gameData != null;
+            return gameManager.GetGameData() != null;
         }
 
         public Dictionary<string, GameData> GetAllProfilesGameData()
@@ -147,27 +164,11 @@ namespace Assets.Scripts.Managers
             return _fileDataManager.LoadAllProfiles();
         }
 
-        public void AddPlayer(PlayerData playerData)
-        {
-            if(_gameData == null)
-            {
-                NewGame();
-            }
-
-            _gameData.PlayerData = playerData;
-
-            SaveGame();
-        }
-        private void OnApplicationQuit()
-        {
-            SaveGame();
-        }
-
         private IEnumerator AutoSave()
         {
             while (true)
             {
-                yield return new WaitForSeconds(autoSaveTimeSeconds);
+                yield return new WaitForSeconds(_autoSaveTimeSeconds);
                 SaveGame();
                 Debug.Log("Auto Saved Game");
             }

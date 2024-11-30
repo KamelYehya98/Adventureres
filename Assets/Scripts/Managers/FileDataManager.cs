@@ -22,6 +22,10 @@ namespace Assets.Scripts.Managers
         {
             _dataDirPath = dataDirPath;
             _dataFileName = dataFilePath;
+
+            Debug.Log("directory path: " + _dataDirPath);
+            Debug.Log("file name: " + _dataFileName);
+
         }
 
         public GameData Load(string profileId, bool allowRestoreFromBackup = true)
@@ -236,7 +240,7 @@ namespace Assets.Scripts.Managers
 
             string result = reader.ReadToEnd();
 
-            JsonSerializerSettings settings = new JsonSerializerSettings();
+            JsonSerializerSettings settings = new();
             settings.Converters.Add(new PlayerDataConverter());
 
             return JsonConvert.DeserializeObject<GameData>(result, settings);
