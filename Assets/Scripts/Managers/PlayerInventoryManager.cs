@@ -52,7 +52,7 @@ namespace Assets.Scripts.Managers
             {
                 Debug.Log("Item in slot type: " + itemInSlot.item.type.ToString());
 
-                EquipItemIfWeapon(itemInSlot);
+                EquipItem(itemInSlot);
             }
         }
 
@@ -174,15 +174,10 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        private void EquipItemIfWeapon(InventoryItem inventoryItem)
+        private void EquipItem(InventoryItem inventoryItem)
         {
-            if (inventoryItem.item.type == ItemType.Sword)
-            {
-                Debug.Log("Equiped item is sword");
-
-                coreController.combatController.ChangeWeapon(inventoryItem.item);
-                coreController.stateManager.meleeStateMachine.SetNextStateToMain();
-            }
+            coreController.combatController.ChangeWeapon(inventoryItem.item);
+            coreController.stateManager.meleeStateMachine.SetNextStateToMain();
         }
     }
 }
